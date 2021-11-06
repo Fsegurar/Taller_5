@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.unbosque</groupId>
-    <artifactId>JPATutorial</artifactId>
+    <artifactId>Taller_5</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>JPATutorial</name>
+    <name>Taller_5</name>
     <packaging>war</packaging>
 
     <properties>
