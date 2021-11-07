@@ -45,7 +45,7 @@ public class UserAppService {
 
     public void saveUserApp(String username, String password, String email, String role) {
 
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("tutorial");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         userappRepository = new UserAppRepositoryImpl(entityManager);

@@ -25,9 +25,12 @@ public class Owner implements Serializable {
     @Column(name = "neighborhood",nullable = false)
     private String neighborhood;
 
-
-
-    //Falta constructor
+    public Owner(Integer person_id, String name, String address, String neighborhood) {
+        this.person_id = person_id;
+        this.name = name;
+        this.address = address;
+        this.neighborhood = neighborhood;
+    }
 
     public UserApp getUserapp() {
         return userapp;

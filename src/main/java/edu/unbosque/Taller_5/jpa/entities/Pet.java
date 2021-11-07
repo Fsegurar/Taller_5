@@ -2,6 +2,8 @@ package edu.unbosque.Taller_5.jpa.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Pet")
@@ -33,6 +35,9 @@ public class Pet implements Serializable {
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Owner owner;
+
+    @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Visit> visits = new ArrayList<>();
 
     //Falta constructor
     public Pet(){}

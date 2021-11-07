@@ -20,17 +20,20 @@ public class Visit implements Serializable {
 
     @Column(name = "description",nullable = false)
     private String description;
-//Ayudaaaaa
-   /* @OneToOne
-    @JoinColumn(name = "name")
-    private Vet vet;*/
+
+    @Column(name = "vetid")
+    private String vetid;
 
     @ManyToOne
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
-    //Falta constructor
+    @ManyToOne
+    @JoinColumn(name = "vet_id")
+    private Vet vet;
 
+    //Falta constructor
+    public Visit(){}
 
     public Integer getVisit_id() {
         return visit_id;
