@@ -15,8 +15,8 @@ public class UserAppRepositoryImpl implements UserAppRepository {
     }
 
     @Override
-    public List<UserApp> findAll() {
-        return entityManager.createQuery("from Userapp").getResultList();
+    public List findAll() {
+        return entityManager.createQuery("from UserApp ").getResultList();
     }
 
     @Override

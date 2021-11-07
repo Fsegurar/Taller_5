@@ -20,6 +20,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
+          <factory-entry name="taller_5" />
           <factory-entry name="tutorial" value="c33a59ab-dd96-477f-ad5a-a86c4436126c" />
         </datasource-mapping>
         <naming-strategy-map>

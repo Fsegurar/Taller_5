@@ -12,7 +12,7 @@ public class Official implements Serializable {
     @JoinColumn(name = "username")
     private UserApp userapp;
 
-    @Column(name = "name")
+    @Column(name = "name",nullable = false)
     private String name;
 
     public Official(){}
