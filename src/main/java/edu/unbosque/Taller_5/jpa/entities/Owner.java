@@ -2,6 +2,8 @@ package edu.unbosque.Taller_5.jpa.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Owner")
@@ -24,6 +26,9 @@ public class Owner implements Serializable {
 
     @Column(name = "neighborhood",nullable = false)
     private String neighborhood;
+
+    @OneToMany(mappedBy = "owner_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Pet> pets = new ArrayList<>();
 
     public Owner(Integer person_id, String name, String address, String neighborhood) {
         this.person_id = person_id;

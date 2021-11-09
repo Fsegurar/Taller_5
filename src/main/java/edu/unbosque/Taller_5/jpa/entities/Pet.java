@@ -34,10 +34,13 @@ public class Pet implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "person_id")
-    private Owner owner;
+    private Owner owner_id;
+
+    @OneToMany(mappedBy = "pet_id", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Visit> visits = new ArrayList<>();
 
     @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Visit> visits = new ArrayList<>();
+    private List<PetCase> petCases = new ArrayList<>();
 
     //Falta constructor
     public Pet(){}
@@ -98,12 +101,12 @@ public class Pet implements Serializable {
         this.picture = picture;
     }
 
-    public Owner getOwner() {
-        return owner;
+    public Owner getOwner_id() {
+        return owner_id;
     }
 
-    public void setOwner(Owner owner) {
-        this.owner = owner;
+    public void setOwner_id(Owner owner) {
+        this.owner_id = owner;
     }
 }
 
