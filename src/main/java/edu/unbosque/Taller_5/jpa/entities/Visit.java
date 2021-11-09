@@ -21,15 +21,12 @@ public class Visit implements Serializable {
     @Column(name = "description",nullable = false)
     private String description;
 
-    @Column(name = "vetid")
-    private String vetid;
-
     @ManyToOne
-    @JoinColumn(name = "pet_id")
+    @JoinColumn(name = "pet_id", referencedColumnName = "pet_id", unique = true)
     private Pet pet;
 
     @ManyToOne
-    @JoinColumn(name = "vet_id")
+    @JoinColumn(name = "vet_id", referencedColumnName = "name", unique = true)
     private Vet vet;
 
     //Falta constructor

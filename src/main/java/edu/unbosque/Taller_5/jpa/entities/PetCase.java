@@ -21,11 +21,13 @@ public class PetCase implements Serializable {
     @Column(name = "description",nullable = false)
     private String description;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
     //Falta constructor
+
+    public PetCase() {}
 
     public Integer getCase_id() {
         return case_id;

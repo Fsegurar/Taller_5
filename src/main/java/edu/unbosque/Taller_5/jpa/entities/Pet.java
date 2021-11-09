@@ -39,8 +39,27 @@ public class Pet implements Serializable {
     @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Visit> visits = new ArrayList<>();
 
+    @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PetCase> cases = new ArrayList<>();
+
     //Falta constructor
     public Pet(){}
+
+    public List<Visit> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(List<Visit> visits) {
+        this.visits = visits;
+    }
+
+    public List<PetCase> getCases() {
+        return cases;
+    }
+
+    public void setCases(List<PetCase> cases) {
+        this.cases = cases;
+    }
 
     public Integer getPet_id() {
         return pet_id;
