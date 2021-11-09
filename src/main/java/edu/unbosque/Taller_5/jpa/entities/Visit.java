@@ -21,16 +21,14 @@ public class Visit implements Serializable {
     @Column(name = "description",nullable = false)
     private String description;
 
-    @Column(name = "vetid")
-    private String vetid;
 
     @ManyToOne
-    @JoinColumn(name = "pet_id")
-    private Pet pet;
+    @JoinColumn(name = "pet_id",referencedColumnName = "pet_id",unique = true)
+    private Pet pet_id;
 
     @ManyToOne
-    @JoinColumn(name = "vet_id")
-    private Vet vet;
+    @JoinColumn(referencedColumnName = "name",unique = true)
+    private Vet vet_id;
 
     //Falta constructor
     public Visit(){}
@@ -67,20 +65,20 @@ public class Visit implements Serializable {
         this.description = description;
     }
 
-    public Vet getVet() {
-        return vet;
+    public Vet getVet_id() {
+        return vet_id;
     }
 
-    public void setVet(Vet vet) {
-        this.vet = vet;
+    public void setVet_id(Vet vet) {
+        this.vet_id = vet;
     }
 
-    public Pet getPet() {
-        return pet;
+    public Pet getPet_id() {
+        return pet_id;
     }
 
-    public void setPet(Pet pet) {
-        this.pet = pet;
+    public void setPet_id(Pet pet) {
+        this.pet_id = pet;
     }
 }
 

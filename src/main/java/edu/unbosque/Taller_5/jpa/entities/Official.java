@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Official implements Serializable {
 
     @Id
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "username")
     private UserApp userapp;
 

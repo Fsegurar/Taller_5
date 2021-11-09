@@ -21,7 +21,7 @@ public class PetCase implements Serializable {
     @Column(name = "description",nullable = false)
     private String description;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
