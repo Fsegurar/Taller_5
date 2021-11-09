@@ -32,10 +32,6 @@ public class Owner implements Serializable {
         this.neighborhood = neighborhood;
     }
 
-    public Owner() {
-
-    }
-
     public UserApp getUserapp() {
         return userapp;
     }
