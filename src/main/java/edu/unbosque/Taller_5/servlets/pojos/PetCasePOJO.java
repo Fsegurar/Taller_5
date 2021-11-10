@@ -17,7 +17,7 @@ public class PetCasePOJO {
         this.description = description;
         this.pet_id = pet_id;
     }
-    
+
     public Integer getCase_id() {
         return case_id;
     }
