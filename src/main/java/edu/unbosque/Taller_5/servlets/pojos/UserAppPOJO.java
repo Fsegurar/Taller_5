@@ -6,59 +6,20 @@ public class UserAppPOJO {
     private String password;
     private String email;
     private String role;
-    private OfficialPOJO official;
-    private OwnerPOJO owner;
-    private VetPOJO vet;
+
 
     public UserAppPOJO() {}
 
-    public UserAppPOJO(String username, String password, String email, String role, OfficialPOJO official){
+    public UserAppPOJO(String username, String password, String email, String role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
-        this.official = official;
     }
 
-    public UserAppPOJO(String username, String password, String email, String role, OwnerPOJO owner) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-        this.owner = owner;
-    }
 
-    public UserAppPOJO(String username, String password, String email, String role, VetPOJO vet) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-        this.vet = vet;
-    }
 
-    public OfficialPOJO getOfficial() {
-        return official;
-    }
-
-    public void setOfficial(OfficialPOJO official) {
-        this.official = official;
-    }
-
-    public OwnerPOJO getOwner() {
-        return owner;
-    }
-
-    public void setOwner(OwnerPOJO owner) {
-        this.owner = owner;
-    }
-
-    public VetPOJO getVet() {
-        return vet;
-    }
-
-    public void setVet(VetPOJO vet) {
-        this.vet = vet;
-    }
+    
 
     public String getUsername() {
         return username;
