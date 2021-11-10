@@ -15,10 +15,14 @@ public class Official implements Serializable {
     @Column(name = "name",nullable = false)
     private String name;
 
-    public Official(){}
+
 
     public Official(String name){
         this.name = name;
+    }
+
+    public Official() {
+
     }
 
     public UserApp getUserapp() {

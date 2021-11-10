@@ -7,6 +7,11 @@ import java.util.Optional;
 
 public interface UserAppRepository {
 
+    Optional<UserApp> findByUsername(String username);
+
     List<UserApp> findAll();
+
     Optional<UserApp> save(UserApp userapp);
+
+    void deleteByUsername(String Username);
 }

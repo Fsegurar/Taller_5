@@ -29,8 +29,14 @@ public class Visit implements Serializable {
     @JoinColumn(name = "vet_id", referencedColumnName = "name", unique = true)
     private Vet vet;
 
-    //Falta constructor
+
     public Visit(){}
+
+    public Visit(String created_at, String type, String description) {
+        this.created_at = created_at;
+        this.type = type;
+        this.description = description;
+    }
 
     public Integer getVisit_id() {
         return visit_id;

@@ -29,6 +29,9 @@ public class Pet implements Serializable {
     @Column(name = "size",nullable = false)
     private String size;
 
+    @Column(name = "sex",nullable = false)
+    private String sex;
+
     @Column(name = "picture",nullable = false)
     private String picture;
 
@@ -39,11 +42,30 @@ public class Pet implements Serializable {
     @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Visit> visits = new ArrayList<>();
 
-    @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<PetCase> cases = new ArrayList<>();
 
-    //Falta constructor
+
+
+    public Pet(String microchip, String name, String species,String sex, String race, String size, String picture) {
+        this.microchip = microchip;
+        this.name = name;
+        this.species = species;
+        this.sex=sex;
+        this.race = race;
+        this.size = size;
+        this.picture = picture;
+    }
+
     public Pet(){}
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     public List<Visit> getVisits() {
         return visits;

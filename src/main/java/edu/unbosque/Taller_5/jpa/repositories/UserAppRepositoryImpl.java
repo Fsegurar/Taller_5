@@ -15,6 +15,12 @@ public class UserAppRepositoryImpl implements UserAppRepository {
     }
 
     @Override
+    public Optional<UserApp> findByUsername(String username) {
+        UserApp userApp = entityManager.find(UserApp.class,username);
+        return userApp!=null ? Optional.of(userApp) : Optional.empty();
+    }
+
+    @Override
     public List findAll() {
         return entityManager.createQuery("from UserApp ").getResultList();
     }
@@ -30,6 +36,23 @@ public class UserAppRepositoryImpl implements UserAppRepository {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    @Override
+    public void deleteByUsername(String Username) {
+        UserApp userApp = entityManager.find(UserApp.class,Username);
+        if(userApp!=null){
+            try{
+                entityManager.getTransaction().begin();
+                entityManager.remove(userApp.getOfficial());
+                entityManager.remove(userApp.getOwner());
+                entityManager.remove(userApp.getVet());
+                entityManager.remove(userApp);
+                entityManager.getTransaction().commit();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
 }

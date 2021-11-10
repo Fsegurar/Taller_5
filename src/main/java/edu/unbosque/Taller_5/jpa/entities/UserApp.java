@@ -4,10 +4,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Userapp")
+@NamedQueries({
+        @NamedQuery(name = "UserApp.findByUserName",
+        query = "SELECT a FROM UserApp a WHERE  a.username= :username")
+})
 public class UserApp {
 
     @Id
-    @GeneratedValue
     @Column(name = "username",nullable = false)
     private String username;
 

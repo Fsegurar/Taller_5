@@ -12,15 +12,29 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class UserAppService {
 
     UserAppRepository userappRepository;
 
+    public UserApp findByUsername(String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        userappRepository = new UserAppRepositoryImpl(entityManager);
+       UserApp persistedUserApp = userappRepository.findByUsername(username).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedUserApp;
+    }
+
     public List<UserAppPOJO> listUsers() {
 
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("tutorial");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         userappRepository = new UserAppRepositoryImpl(entityManager);
@@ -29,9 +43,9 @@ public class UserAppService {
         entityManager.close();
         entityManagerFactory.close();
 
-        List<UserAppPOJO> userappPOJO = new ArrayList<>();
+        List<UserAppPOJO> usersappPOJO = new ArrayList<>();
         for (UserApp user : users) {
-            userappPOJO.add(new UserAppPOJO(
+            usersappPOJO.add(new UserAppPOJO(
                     user.getUsername(),
                     user.getPassword(),
                     user.getEmail(),
@@ -39,11 +53,11 @@ public class UserAppService {
             ));
         }
 
-        return userappPOJO;
+        return usersappPOJO;
 
     }
 
-    public void saveUserApp(String username, String password, String email, String role) {
+    public UserApp saveUserApp(String username, String password, String email, String role) {
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -56,8 +70,17 @@ public class UserAppService {
         entityManager.close();
         entityManagerFactory.close();
 
-        return;
+        return persistedUserApp;
 
     }
+    public void deleteUserapp(String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
+        userappRepository = new UserAppRepositoryImpl(entityManager);
+        userappRepository.deleteByUsername(username);
+
+        entityManager.close();
+        entityManagerFactory.close();
+    }
 }

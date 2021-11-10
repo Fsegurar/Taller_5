@@ -34,8 +34,7 @@ public class Owner implements Serializable {
 
     }
 
-    public Owner(Integer person_id, String name, String address, String neighborhood) {
-        this.person_id = person_id;
+    public Owner( String name, String address, String neighborhood) {
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
