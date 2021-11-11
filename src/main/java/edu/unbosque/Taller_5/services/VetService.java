@@ -127,7 +127,7 @@ public class VetService {
         entityManagerFactory.close();
 
         VetPOJO vetPOJO= new VetPOJO(name,address,neighborhood);
-        
+
         return vetPOJO;
     }
 }

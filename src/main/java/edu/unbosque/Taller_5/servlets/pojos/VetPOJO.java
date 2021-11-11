@@ -17,7 +17,6 @@ public class VetPOJO {
     }
 
     public VetPOJO( String name, String address, String neighborhood) {
-        this.username = username;
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;

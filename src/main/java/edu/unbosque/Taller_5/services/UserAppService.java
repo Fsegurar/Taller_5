@@ -19,17 +19,24 @@ public class UserAppService {
 
     UserAppRepository userappRepository;
 
-    public UserApp editEmailByUsername(String username,String email){
+    public UserAppPOJO editEmailByUsername(String username,String email){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         userappRepository = new UserAppRepositoryImpl(entityManager);
         UserApp persistedUserApp = userappRepository.editEmailByUsername(username,email).get();
+        List<UserApp> users = userappRepository.findAll();
 
         entityManager.close();
         entityManagerFactory.close();
+        UserAppPOJO userAppPOJO = new UserAppPOJO();
+        for (UserApp user : users) {
+            if (user.getUsername().equalsIgnoreCase(username)){
+                userAppPOJO = new UserAppPOJO(user.getUsername(),user.getPassword(),user.getEmail(),user.getRole());
+            }
+        }
 
-        return persistedUserApp;
+        return userAppPOJO;
 
     }
     public UserApp findByUsername(String username){
