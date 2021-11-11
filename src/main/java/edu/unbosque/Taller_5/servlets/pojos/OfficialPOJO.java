@@ -12,6 +12,10 @@ public class OfficialPOJO {
         this.name = name;
     }
 
+    public OfficialPOJO(String name) {
+        this.name = name;
+    }
+
     public String getUsername() {
         return username;
     }

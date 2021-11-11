@@ -6,6 +6,7 @@ public class UserAppPOJO {
     private String password;
     private String email;
     private String role;
+    private OfficialPOJO official;
 
 
     public UserAppPOJO() {}
@@ -17,8 +18,13 @@ public class UserAppPOJO {
         this.role = role;
     }
 
-
-
+    public UserAppPOJO(String username, String password, String email, String role, OfficialPOJO official) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.official = official;
+    }
 
 
     public String getUsername() {
@@ -51,5 +57,13 @@ public class UserAppPOJO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public OfficialPOJO getOfficial() {
+        return official;
+    }
+
+    public void setOfficial(OfficialPOJO official) {
+        this.official = official;
     }
 }

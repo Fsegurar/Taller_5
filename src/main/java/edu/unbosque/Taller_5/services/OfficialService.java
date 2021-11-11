@@ -79,7 +79,7 @@ public class OfficialService {
 
     }
 
-    public Official saveOfficial(String name) {
+    public OfficialPOJO saveOfficial(String name) {
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -87,12 +87,14 @@ public class OfficialService {
         officialRepository = new OfficialRepositoryImpl(entityManager);
 
         Official official = new Official(name);
-        Official persistedOfficial1 = officialRepository.save(official).get();
+        Official persistedOfficial = officialRepository.save(official).get();
 
         entityManager.close();
         entityManagerFactory.close();
 
-        return persistedOfficial1;
+        OfficialPOJO officialpojo = new OfficialPOJO(name);
+
+        return officialpojo;
 
     }
 }
