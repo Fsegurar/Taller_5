@@ -1,11 +1,14 @@
 package edu.unbosque.Taller_5.servlets;
 
 
+import edu.unbosque.Taller_5.services.OfficialService;
 import edu.unbosque.Taller_5.services.UserAppService;
+import edu.unbosque.Taller_5.servlets.pojos.OfficialPOJO;
 import edu.unbosque.Taller_5.servlets.pojos.UserAppPOJO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+import javax.xml.registry.infomodel.User;
 import java.util.Optional;
 
 @Path("/userapp")
@@ -21,7 +24,10 @@ public class UserAppResource {
 
         if (userapp.getRole().equals("official")){
 
-        }else if(userapp.getRole().equals("")){
+            Optional<OfficialPOJO> persistedOfficial = Optional.of(new OfficialService().saveOfficial(
+                    userapp.getOfficial().getName()));
+
+        }else if(userapp.getRole().equals("owner")){
 
         }else if(userapp.getRole().equals("vet")){
 

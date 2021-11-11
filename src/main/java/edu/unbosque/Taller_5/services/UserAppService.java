@@ -70,7 +70,7 @@ public class UserAppService {
 
     }
 
-    public UserApp saveUserApp(String username, String password, String email, String role) {
+    public UserAppPOJO saveUserApp(String username, String password, String email, String role) {
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -83,7 +83,9 @@ public class UserAppService {
         entityManager.close();
         entityManagerFactory.close();
 
-        return persistedUserApp;
+        UserAppPOJO userappPOJO = new UserAppPOJO(username, password, email, role);
+
+        return userappPOJO;
 
     }
     public void deleteUserapp(String username){
