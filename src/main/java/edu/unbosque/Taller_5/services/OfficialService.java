@@ -2,9 +2,11 @@ package edu.unbosque.Taller_5.services;
 
 
 import edu.unbosque.Taller_5.jpa.entities.Official;
+import edu.unbosque.Taller_5.jpa.entities.UserApp;
 import edu.unbosque.Taller_5.jpa.repositories.OfficialRepository;
 import edu.unbosque.Taller_5.jpa.repositories.OfficialRepositoryImpl;
 import edu.unbosque.Taller_5.servlets.pojos.OfficialPOJO;
+import edu.unbosque.Taller_5.servlets.pojos.UserAppPOJO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,17 +20,25 @@ public class OfficialService {
 
     OfficialRepository officialRepository;
 
-    public Official editNameByUsername(String username,String name){
+    public OfficialPOJO editNameByUsername(String username,String name){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         officialRepository = new OfficialRepositoryImpl(entityManager);
         Official persistedOfficial = officialRepository.editNameByUsername(username,name).get();
+        List<Official> users = officialRepository.findAll();
 
         entityManager.close();
         entityManagerFactory.close();
+        OfficialPOJO officialPOJO = new OfficialPOJO();
+        for (Official user : users) {
+            if (user.getUsername().equals(username)){
+                officialPOJO = new OfficialPOJO(user.getUsername().getUsername(),user.getName());
+            }
+        }
 
-        return persistedOfficial;
+        return officialPOJO;
+
     }
     public Official findByUsername(String name){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
@@ -87,7 +97,7 @@ public class OfficialService {
         officialRepository = new OfficialRepositoryImpl(entityManager);
 
         Official official = new Official(name);
-        Official persistedOfficial = officialRepository.save(official).get();
+         officialRepository.save(official);
 
         entityManager.close();
         entityManagerFactory.close();

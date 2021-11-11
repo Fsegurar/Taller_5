@@ -26,6 +26,16 @@ public class PetPOJO {
         this.owner_id = owner_id;
     }
 
+    public PetPOJO(String microchip, String name, String species, String sex, String race, String size, String picture) {
+        this.microchip = microchip;
+        this.name = name;
+        this.species = species;
+        this.race = race;
+        this.size = size;
+        this.sex = sex;
+        this.picture = picture;
+    }
+
     public Integer getPet_id() {
         return pet_id;
     }

@@ -92,7 +92,7 @@ public class VisitService {
         return  visitPOJO;
     }
 
-    public Visit saveVisit(String created_at, String type, String description){
+    public VisitPOJO saveVisit(String created_at, String type, String description){
         if (type.equalsIgnoreCase("esterilización")||type.equalsIgnoreCase("esterilizacion")||type.equalsIgnoreCase("implantación de microchip")||type.equalsIgnoreCase("implantacion de microchip")||type.equalsIgnoreCase("vacunación")||type.equalsIgnoreCase("desparasitación")||type.equalsIgnoreCase("desparasitacion")||type.equalsIgnoreCase("urgencia ")||type.equalsIgnoreCase("control")) {
             EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
             EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -100,12 +100,13 @@ public class VisitService {
             visitRepository = new VisitRepositoryImpl(entityManager);
 
             Visit visit = new Visit(created_at, type, description);
-            Visit persistedVisit = visitRepository.save(visit).get();
+             visitRepository.save(visit);
 
             entityManager.close();
             entityManagerFactory.close();
 
-            return persistedVisit;
+            VisitPOJO visitPOJO = new VisitPOJO(created_at, type, description);
+            return visitPOJO;
         }else {
             return  null;
         }

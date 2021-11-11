@@ -17,41 +17,64 @@ public class OwnerService {
 
     OwnerRepository ownerRepository;
 
-    public Owner editNameByUsername(String username,String name){
+    public OwnerPOJO editNameByUsername(String username,String name){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerRepositoryImpl(entityManager);
         Owner persistedOwner = ownerRepository.editNameByUsername(username,name).get();
+        List<Owner> users = ownerRepository.findAll();
 
         entityManager.close();
         entityManagerFactory.close();
+        OwnerPOJO ownerPOJO = new OwnerPOJO();
+        for (Owner user : users) {
+            if (user.getUsername().equals(username)){
+                ownerPOJO = new OwnerPOJO(user.getUsername().getUsername(),user.getPerson_id(),user.getName(),user.getAddress(),user.getNeighborhood());
+            }
+        }
 
-        return persistedOwner;
+        return ownerPOJO;
     }
-    public Owner editAddressByUsername(String username,String address){
+    public OwnerPOJO editAddressByUsername(String username,String address){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerRepositoryImpl(entityManager);
         Owner persistedOwner = ownerRepository.editAddressByUsername(username,address).get();
+        List<Owner> users = ownerRepository.findAll();
 
         entityManager.close();
         entityManagerFactory.close();
+        OwnerPOJO ownerPOJO = new OwnerPOJO();
+        for (Owner user : users) {
+            if (user.getUsername().equals(username)){
+                ownerPOJO = new OwnerPOJO(user.getUsername().getUsername(),user.getPerson_id(),user.getName(),user.getAddress(),user.getNeighborhood());
+            }
+        }
 
-        return persistedOwner;
+        return ownerPOJO;
     }
-    public Owner editNeighborhoodByUsername(String username,String neighborhood){
+    public OwnerPOJO editNeighborhoodByUsername(String username,String neighborhood){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerRepositoryImpl(entityManager);
         Owner persistedOwner = ownerRepository.editNeighborhoodByUsername(username,neighborhood).get();
 
+        List<Owner> users = ownerRepository.findAll();
+
         entityManager.close();
         entityManagerFactory.close();
+        OwnerPOJO ownerPOJO = new OwnerPOJO();
+        for (Owner user : users) {
+            if (user.getUsername().equals(username)){
+                ownerPOJO = new OwnerPOJO(user.getUsername().getUsername(),user.getPerson_id(),user.getName(),user.getAddress(),user.getNeighborhood());
+            }
+        }
 
-        return persistedOwner;
+        return ownerPOJO;
+
     }
 
     public Owner findByOwnerId(Integer owner_id){
@@ -129,18 +152,19 @@ public class OwnerService {
         return ownerPOJO;
     }
 
-    public Owner saveOwner(String name, String address, String neighborhood){
+    public OwnerPOJO saveOwner(String name, String address, String neighborhood){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerRepositoryImpl(entityManager);
 
         Owner owner = new Owner(name,address,neighborhood);
-        Owner persistedOwner = ownerRepository.save(owner).get();
+        ownerRepository.save(owner);
 
         entityManager.close();
         entityManagerFactory.close();
 
-        return persistedOwner;
+        OwnerPOJO ownerPOJO = new OwnerPOJO(name,address,neighborhood);
+        return ownerPOJO;
     }
 }

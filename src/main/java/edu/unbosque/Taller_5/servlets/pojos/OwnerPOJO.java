@@ -18,6 +18,12 @@ public class OwnerPOJO {
         this.neighborhood = neighborhood;
     }
 
+    public OwnerPOJO(String name, String address, String neighborhood) {
+        this.name = name;
+        this.address = address;
+        this.neighborhood = neighborhood;
+    }
+
     public String getUsername() {
         return username;
     }
