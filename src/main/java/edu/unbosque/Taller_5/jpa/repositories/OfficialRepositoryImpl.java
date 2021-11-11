@@ -1,6 +1,7 @@
 package edu.unbosque.Taller_5.jpa.repositories;
 
 import edu.unbosque.Taller_5.jpa.entities.Official;
+import edu.unbosque.Taller_5.jpa.entities.UserApp;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -40,6 +41,15 @@ public class OfficialRepositoryImpl implements OfficialRepository{
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    @Override
+    public Optional<Official> editNameByUsername(String username, String name) {
+        Official official = (Official) entityManager.createQuery("UPDATE Official   SET  name = :name  WHERE username = :username")
+                .setParameter("name",name)
+                .setParameter("username",username)
+                .getSingleResult();
+        return official!=null ? Optional.of(official) : Optional.empty();
     }
 
 }

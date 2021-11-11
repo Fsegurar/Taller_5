@@ -78,18 +78,23 @@ public class PetCaseService {
         return petCasePOJO;
     }
     public PetCase savePetCase(String created_at, String type, String description){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        if (type.equalsIgnoreCase("perdida") || type.equalsIgnoreCase("pérdida") || type.equalsIgnoreCase("robo ") || type.equalsIgnoreCase("fallecimiento")) {
 
-        petCaseRepository = new PetCaseRepositoryImpl(entityManager);
 
-        PetCase petCase= new PetCase(created_at,type,description);
-        PetCase persistedPetCase = petCaseRepository.save(petCase).get();
+            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+            EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        entityManager.close();
-        entityManagerFactory.close();
+            petCaseRepository = new PetCaseRepositoryImpl(entityManager);
 
-        return persistedPetCase;
+            PetCase petCase = new PetCase(created_at, type, description);
+            PetCase persistedPetCase = petCaseRepository.save(petCase).get();
+
+            entityManager.close();
+            entityManagerFactory.close();
+            return persistedPetCase;
+        }else {
+            return null;
+        }
     }
 }
 

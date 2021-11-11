@@ -21,13 +21,13 @@ public class VetRepositoryImpl implements VetRepository{
     }
 
     @Override
-    public Optional<Vet> findByAdress(String Adress) {
+    public Optional<Vet> findByAddress(String Adress) {
         Vet vet = entityManager.find(Vet.class,Adress);
         return vet!=null ? Optional.of(vet) : Optional.empty();
     }
 
     @Override
-    public Optional<Vet> findeByNeighborhood(String neighborhood) {
+    public Optional<Vet> findByNeighborhood(String neighborhood) {
         Vet vet = entityManager.find(Vet.class,neighborhood);
         return vet!=null ? Optional.of(vet) : Optional.empty();
     }
@@ -47,5 +47,32 @@ public class VetRepositoryImpl implements VetRepository{
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    @Override
+    public Optional<Vet> editNameByUsername(String username, String name) {
+        Vet vet = (Vet) entityManager.createQuery("UPDATE Vet   SET  name = :name  WHERE username = :username")
+                .setParameter("name",name)
+                .setParameter("username",username)
+                .getSingleResult();
+        return vet!=null ? Optional.of(vet) : Optional.empty();
+    }
+
+    @Override
+    public Optional<Vet> editAddressByUsername(String username, String address) {
+        Vet vet = (Vet) entityManager.createQuery("UPDATE Vet   SET  address = :address  WHERE username = :username")
+                .setParameter("address",address)
+                .setParameter("username",username)
+                .getSingleResult();
+        return vet!=null ? Optional.of(vet) : Optional.empty();
+    }
+
+    @Override
+    public Optional<Vet> editNeighborhoodByUsername(String username, String neighborhood) {
+        Vet vet = (Vet) entityManager.createQuery("UPDATE Vet   SET  neighborhood = :neighborhood  WHERE username = :username")
+                .setParameter("neighborhood",neighborhood)
+                .setParameter("username",username)
+                .getSingleResult();
+        return vet!=null ? Optional.of(vet) : Optional.empty();
     }
 }

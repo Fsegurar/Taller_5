@@ -54,4 +54,31 @@ public class OwnerRepositoryImpl implements OwnerRepository{
         }
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Owner> editNameByUsername(String username, String name) {
+        Owner owner = (Owner) entityManager.createQuery("UPDATE Owner   SET  name = :name  WHERE username = :username")
+                .setParameter("name",name)
+                .setParameter("username",username)
+                .getSingleResult();
+        return owner!=null ? Optional.of(owner) : Optional.empty();
+    }
+
+    @Override
+    public Optional<Owner> editAddressByUsername(String username, String address) {
+        Owner owner = (Owner) entityManager.createQuery("UPDATE Owner   SET  address = :address  WHERE username = :username")
+                .setParameter("address",address)
+                .setParameter("username",username)
+                .getSingleResult();
+        return owner!=null ? Optional.of(owner) : Optional.empty();
+    }
+
+    @Override
+    public Optional<Owner> editNeighborhoodByUsername(String username, String neighborhood) {
+        Owner owner = (Owner) entityManager.createQuery("UPDATE Owner   SET  neighborhood = :neighborhood  WHERE username = :username")
+                .setParameter("neighborhood",neighborhood)
+                .setParameter("username",username)
+                .getSingleResult();
+        return owner!=null ? Optional.of(owner) : Optional.empty();
+    }
 }

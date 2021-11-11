@@ -19,6 +19,10 @@ public interface OwnerRepository {
 
     Optional<Owner> save(Owner owner);
 
+    Optional<Owner> editNameByUsername(String username,String name);
 
+    Optional<Owner> editAddressByUsername(String username,String address);
+
+    Optional<Owner> editNeighborhoodByUsername(String username,String neighborhood);
 
 }

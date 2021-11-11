@@ -19,6 +19,19 @@ public class UserAppService {
 
     UserAppRepository userappRepository;
 
+    public UserApp editEmailByUsername(String username,String email){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        userappRepository = new UserAppRepositoryImpl(entityManager);
+        UserApp persistedUserApp = userappRepository.editEmailByUsername(username,email).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedUserApp;
+
+    }
     public UserApp findByUsername(String username){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();

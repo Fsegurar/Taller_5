@@ -93,17 +93,21 @@ public class VisitService {
     }
 
     public Visit saveVisit(String created_at, String type, String description){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        if (type.equalsIgnoreCase("esterilización")||type.equalsIgnoreCase("esterilizacion")||type.equalsIgnoreCase("implantación de microchip")||type.equalsIgnoreCase("implantacion de microchip")||type.equalsIgnoreCase("vacunación")||type.equalsIgnoreCase("desparasitación")||type.equalsIgnoreCase("desparasitacion")||type.equalsIgnoreCase("urgencia ")||type.equalsIgnoreCase("control")) {
+            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+            EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        visitRepository = new VisitRepositoryImpl(entityManager);
+            visitRepository = new VisitRepositoryImpl(entityManager);
 
-        Visit visit = new Visit(created_at,type,description);
-        Visit persistedVisit = visitRepository.save(visit).get();
+            Visit visit = new Visit(created_at, type, description);
+            Visit persistedVisit = visitRepository.save(visit).get();
 
-        entityManager.close();
-        entityManagerFactory.close();
+            entityManager.close();
+            entityManagerFactory.close();
 
-        return persistedVisit;
+            return persistedVisit;
+        }else {
+            return  null;
+        }
     }
 }

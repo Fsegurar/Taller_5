@@ -12,7 +12,7 @@ public class Owner implements Serializable {
     @Id
     @OneToOne
     @JoinColumn(name = "username")
-    private UserApp userapp;
+    private UserApp username;
 
     @GeneratedValue
     @Column(nullable = false, unique = true, name = "person_id")
@@ -48,12 +48,12 @@ public class Owner implements Serializable {
         this.pets = pets;
     }
 
-    public UserApp getUserapp() {
-        return userapp;
+    public UserApp getUsername() {
+        return username;
     }
 
-    public void setUserapp(UserApp userapp) {
-        this.userapp = userapp;
+    public void setUsername(UserApp userapp) {
+        this.username = userapp;
     }
 
     public Integer getPerson_id() {

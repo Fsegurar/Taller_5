@@ -2,10 +2,8 @@ package edu.unbosque.Taller_5.services;
 
 
 import edu.unbosque.Taller_5.jpa.entities.Official;
-import edu.unbosque.Taller_5.jpa.entities.UserApp;
 import edu.unbosque.Taller_5.jpa.repositories.OfficialRepository;
 import edu.unbosque.Taller_5.jpa.repositories.OfficialRepositoryImpl;
-import edu.unbosque.Taller_5.jpa.repositories.UserAppRepositoryImpl;
 import edu.unbosque.Taller_5.servlets.pojos.OfficialPOJO;
 
 import javax.ejb.Stateless;
@@ -20,6 +18,18 @@ public class OfficialService {
 
     OfficialRepository officialRepository;
 
+    public Official editNameByUsername(String username,String name){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        officialRepository = new OfficialRepositoryImpl(entityManager);
+        Official persistedOfficial = officialRepository.editNameByUsername(username,name).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedOfficial;
+    }
     public Official findByUsername(String name){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -60,7 +70,7 @@ public class OfficialService {
         List<OfficialPOJO> officialPOJOS = new ArrayList<>();
         for (Official official : officials) {
             officialPOJOS.add(new OfficialPOJO(
-                    official.getUserapp().getUsername(),
+                    official.getUsername().getUsername(),
                     official.getName()
             ));
         }

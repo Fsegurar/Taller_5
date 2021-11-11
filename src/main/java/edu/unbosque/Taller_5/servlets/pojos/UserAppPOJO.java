@@ -19,7 +19,7 @@ public class UserAppPOJO {
 
 
 
-    
+
 
     public String getUsername() {
         return username;

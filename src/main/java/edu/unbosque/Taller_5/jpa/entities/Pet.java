@@ -32,7 +32,7 @@ public class Pet implements Serializable {
     @Column(name = "sex",nullable = false)
     private String sex;
 
-    @Column(name = "picture",nullable = false)
+    @Column(name = "picture")
     private String picture;
 
     @ManyToOne

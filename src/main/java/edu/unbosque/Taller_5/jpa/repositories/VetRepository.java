@@ -9,11 +9,17 @@ public interface VetRepository {
 
     Optional<Vet> findByName(String name);
 
-    Optional<Vet> findByAdress(String Adress);
+    Optional<Vet> findByAddress(String Address);
 
-    Optional<Vet> findeByNeighborhood(String neighborhood);
+    Optional<Vet> findByNeighborhood(String neighborhood);
 
     List<Vet> findAll();
 
     Optional<Vet> save(Vet vet);
+
+    Optional<Vet> editNameByUsername(String username,String name);
+
+    Optional<Vet> editAddressByUsername(String username,String address);
+
+    Optional<Vet> editNeighborhoodByUsername(String username,String neighborhood);
 }

@@ -24,6 +24,15 @@ public interface PetRepository {
 
     Optional<Pet> save(Pet pet);
 
+    Optional<Pet> editNameByPetId(Integer pet_id,String name);
 
+    Optional<Pet> editSpecieByPetId(Integer pet_id,String specie);
 
+    Optional<Pet> editRaceByPetId(Integer pet_id,String race);
+
+    Optional<Pet> editSizeByPetId(Integer pet_id,String size);
+
+    Optional<Pet> editSexByPetId(Integer pet_id,String sex);
+
+    Optional<Pet> editPictureByPetId(Integer pet_id,String picture);
 }

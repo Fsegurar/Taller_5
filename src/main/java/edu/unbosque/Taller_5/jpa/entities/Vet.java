@@ -12,7 +12,7 @@ public class Vet implements Serializable {
     @Id
     @OneToOne
     @JoinColumn(name = "username")
-    private UserApp userapp;
+    private UserApp username;
 
     @Column(name = "name",nullable = false, unique = true)
     private String name;
@@ -34,12 +34,12 @@ public class Vet implements Serializable {
         this.neighborhood = neighborhood;
     }
 
-    public UserApp getUserapp() {
-        return userapp;
+    public UserApp getUsername() {
+        return username;
     }
 
-    public void setUserapp(UserApp userapp) {
-        this.userapp = userapp;
+    public void setUsername(UserApp userapp) {
+        this.username = userapp;
     }
 
     public String getName() {

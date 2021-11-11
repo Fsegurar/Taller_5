@@ -17,6 +17,42 @@ public class VetService {
 
     VetRepository vetRepository;
 
+    public Vet editNameByUsername(String username,String name){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        vetRepository = new VetRepositoryImpl(entityManager);
+        Vet persistedVet = vetRepository.editNameByUsername(username,name).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedVet;
+    }
+    public Vet editAddressByUsername(String username,String address){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        vetRepository = new VetRepositoryImpl(entityManager);
+        Vet persistedVet = vetRepository.editAddressByUsername(username,address).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedVet;
+    }
+    public Vet editNeighborhoodByUsername(String username,String neighborhood){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        vetRepository = new VetRepositoryImpl(entityManager);
+        Vet persistedVet = vetRepository.editNeighborhoodByUsername(username,neighborhood).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedVet;
+    }
     public Vet findByName(String name){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -35,7 +71,7 @@ public class VetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         vetRepository = new VetRepositoryImpl(entityManager);
-        Vet persistedVet = vetRepository.findByAdress(Adress).get();
+        Vet persistedVet = vetRepository.findByAddress(Adress).get();
 
         entityManager.close();
         entityManagerFactory.close();
@@ -48,7 +84,7 @@ public class VetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         vetRepository = new VetRepositoryImpl(entityManager);
-        Vet persistedVet = vetRepository.findeByNeighborhood(neighborhood).get();
+        Vet persistedVet = vetRepository.findByNeighborhood(neighborhood).get();
 
         entityManager.close();
         entityManagerFactory.close();
@@ -69,7 +105,7 @@ public class VetService {
         List<VetPOJO> vetPOJO = new ArrayList<>();
         for (Vet vet : vets){
             vetPOJO.add(new VetPOJO(
-                    vet.getUserapp().getUsername(),
+                    vet.getUsername().getUsername(),
                     vet.getName(),
                     vet.getAddress(),
                     vet.getNeighborhood()
