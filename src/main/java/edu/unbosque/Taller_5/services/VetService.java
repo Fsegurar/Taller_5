@@ -114,7 +114,7 @@ public class VetService {
         return vetPOJO;
     }
 
-    public Vet saveVet(String name, String address, String neighborhood){
+    public VetPOJO saveVet(String name, String address, String neighborhood){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
@@ -126,6 +126,8 @@ public class VetService {
         entityManager.close();
         entityManagerFactory.close();
 
-        return persistedVet;
+        VetPOJO vetPOJO= new VetPOJO(name,address,neighborhood);
+        
+        return vetPOJO;
     }
 }
