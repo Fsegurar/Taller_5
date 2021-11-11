@@ -17,6 +17,43 @@ public class OwnerService {
 
     OwnerRepository ownerRepository;
 
+    public Owner editNameByUsername(String username,String name){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        ownerRepository = new OwnerRepositoryImpl(entityManager);
+        Owner persistedOwner = ownerRepository.editNameByUsername(username,name).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedOwner;
+    }
+    public Owner editAddressByUsername(String username,String address){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        ownerRepository = new OwnerRepositoryImpl(entityManager);
+        Owner persistedOwner = ownerRepository.editAddressByUsername(username,address).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedOwner;
+    }
+    public Owner editNeighborhoodByUsername(String username,String neighborhood){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        ownerRepository = new OwnerRepositoryImpl(entityManager);
+        Owner persistedOwner = ownerRepository.editNeighborhoodByUsername(username,neighborhood).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedOwner;
+    }
+
     public Owner findByOwnerId(Integer owner_id){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -82,7 +119,7 @@ public class OwnerService {
         List<OwnerPOJO> ownerPOJO = new ArrayList<>();
         for (Owner owner : owners){
             ownerPOJO.add(new OwnerPOJO(
-                    owner.getUserapp().getUsername(),
+                    owner.getUsername().getUsername(),
                     owner.getPerson_id(),
                     owner.getName(),
                     owner.getAddress(),

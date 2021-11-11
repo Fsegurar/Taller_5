@@ -4,10 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Userapp")
-@NamedQueries({
-        @NamedQuery(name = "UserApp.findByUserName",
-        query = "SELECT a FROM UserApp a WHERE  a.username= :username")
-})
+
 public class UserApp {
 
     @Id
@@ -23,13 +20,13 @@ public class UserApp {
     @Column(name = "role",nullable = false)
     private String role;
 
-    @OneToOne(mappedBy = "userapp")
+    @OneToOne(mappedBy = "username")
     private Official official;
 
-    @OneToOne(mappedBy = "userapp")
+    @OneToOne(mappedBy = "username")
     private Owner owner;
 
-    @OneToOne(mappedBy = "userapp")
+    @OneToOne(mappedBy = "username")
     private Vet vet;
 
     public UserApp(){}

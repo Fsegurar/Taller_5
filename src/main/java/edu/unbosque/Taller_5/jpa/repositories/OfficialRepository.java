@@ -15,4 +15,5 @@ public interface OfficialRepository {
 
     Optional<Official> save(Official official);
 
+    Optional<Official> editNameByUsername(String username,String name);
 }

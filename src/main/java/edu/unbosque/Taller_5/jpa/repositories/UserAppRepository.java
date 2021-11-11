@@ -14,4 +14,6 @@ public interface UserAppRepository {
     Optional<UserApp> save(UserApp userapp);
 
     void deleteByUsername(String Username);
+
+    Optional<UserApp> editEmailByUsername(String username,String email);
 }
