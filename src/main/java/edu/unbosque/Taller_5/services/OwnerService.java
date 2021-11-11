@@ -152,18 +152,19 @@ public class OwnerService {
         return ownerPOJO;
     }
 
-    public Owner saveOwner(String name, String address, String neighborhood){
+    public OwnerPOJO saveOwner(String name, String address, String neighborhood){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerRepositoryImpl(entityManager);
 
         Owner owner = new Owner(name,address,neighborhood);
-        Owner persistedOwner = ownerRepository.save(owner).get();
+        ownerRepository.save(owner);
 
         entityManager.close();
         entityManagerFactory.close();
 
-        return persistedOwner;
+        OwnerPOJO ownerPOJO = new OwnerPOJO(name,address,neighborhood);
+        return ownerPOJO;
     }
 }

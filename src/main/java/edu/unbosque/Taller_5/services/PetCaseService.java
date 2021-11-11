@@ -87,7 +87,7 @@ public class PetCaseService {
             petCaseRepository = new PetCaseRepositoryImpl(entityManager);
 
             PetCase petCase = new PetCase(created_at, type, description);
-            PetCase persistedPetCase = petCaseRepository.save(petCase).get();
+            petCaseRepository.save(petCase);
 
             entityManager.close();
             entityManagerFactory.close();

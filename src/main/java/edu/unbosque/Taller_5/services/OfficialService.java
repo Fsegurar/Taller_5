@@ -97,7 +97,7 @@ public class OfficialService {
         officialRepository = new OfficialRepositoryImpl(entityManager);
 
         Official official = new Official(name);
-        Official persistedOfficial = officialRepository.save(official).get();
+         officialRepository.save(official);
 
         entityManager.close();
         entityManagerFactory.close();

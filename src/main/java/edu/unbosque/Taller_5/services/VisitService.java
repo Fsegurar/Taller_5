@@ -100,7 +100,7 @@ public class VisitService {
             visitRepository = new VisitRepositoryImpl(entityManager);
 
             Visit visit = new Visit(created_at, type, description);
-            Visit persistedVisit = visitRepository.save(visit).get();
+             visitRepository.save(visit);
 
             entityManager.close();
             entityManagerFactory.close();

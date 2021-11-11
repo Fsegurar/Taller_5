@@ -255,18 +255,19 @@ public class PetService {
         return petPOJO;
     }
 
-    public Pet savePet( String microchip, String name, String species, String race, String size, String sex, String picture, Integer owner_id){
+    public PetPOJO savePet( String microchip, String name, String species, String race, String size, String sex, String picture, Integer owner_id){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetRepositoryImpl(entityManager);
 
         Pet pet = new Pet(microchip,name,species,sex,race,size,picture);
-        Pet persistedPet = petRepository.save(pet).get();
+        petRepository.save(pet);
 
         entityManager.close();
         entityManagerFactory.close();
 
-        return persistedPet;
+        PetPOJO petPOJO = new PetPOJO(microchip,name,species,sex,race,size,picture);
+        return petPOJO;
     }
 }

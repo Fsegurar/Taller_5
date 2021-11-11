@@ -144,7 +144,7 @@ public class VetService {
         vetRepository = new VetRepositoryImpl(entityManager);
 
         Vet vet = new Vet(name,address,neighborhood);
-        Vet persistedVet = vetRepository.save(vet).get();
+         vetRepository.save(vet);
 
         entityManager.close();
         entityManagerFactory.close();
