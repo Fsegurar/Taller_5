@@ -33,14 +33,20 @@ public class UserAppResource {
 
         }
 
+
+        //return Response.status(Response.Status.CREATED)
+               // .entity(new UserAppPOJO(userapp.getUsername(), userapp.getEmail(), userapp.getPassword(), userapp.getRole()))
+                //.build();
+
         if (persistedUser.isPresent()) {
             return Response.status(Response.Status.CREATED)
-                    .entity(persistedUser.get())
                     .build();
         } else {
             return Response.serverError()
                     .entity("User could not be created")
                     .build();
         }
+
+
     }
 }

@@ -78,7 +78,7 @@ public class UserAppService {
         userappRepository = new UserAppRepositoryImpl(entityManager);
 
         UserApp userapp = new UserApp(username, password, email, role);
-        UserApp persistedUserApp = userappRepository.save(userapp).get();
+        userappRepository.save(userapp);
 
         entityManager.close();
         entityManagerFactory.close();
