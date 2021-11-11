@@ -77,7 +77,7 @@ public class PetCaseService {
         }
         return petCasePOJO;
     }
-    public PetCase savePetCase(String created_at, String type, String description){
+    public PetCasePOJO savePetCase(String created_at, String type, String description){
         if (type.equalsIgnoreCase("perdida") || type.equalsIgnoreCase("pérdida") || type.equalsIgnoreCase("robo ") || type.equalsIgnoreCase("fallecimiento")) {
 
 
@@ -91,7 +91,9 @@ public class PetCaseService {
 
             entityManager.close();
             entityManagerFactory.close();
-            return persistedPetCase;
+
+            PetCasePOJO petCasePOJO = new PetCasePOJO(created_at, type, description);
+            return petCasePOJO;
         }else {
             return null;
         }

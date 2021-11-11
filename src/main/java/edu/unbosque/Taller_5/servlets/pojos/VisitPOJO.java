@@ -20,6 +20,12 @@ public class VisitPOJO {
         this.pet_id = pet_id;
     }
 
+    public VisitPOJO(String created_at, String type, String description) {
+        this.created_at = created_at;
+        this.type = type;
+        this.description = description;
+    }
+
     public Integer getVisit_id() {
         return visit_id;
     }

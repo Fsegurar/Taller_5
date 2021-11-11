@@ -18,6 +18,12 @@ public class PetCasePOJO {
         this.pet_id = pet_id;
     }
 
+    public PetCasePOJO(String created_at, String type, String description) {
+        this.created_at = created_at;
+        this.type = type;
+        this.description = description;
+    }
+
     public Integer getCase_id() {
         return case_id;
     }
