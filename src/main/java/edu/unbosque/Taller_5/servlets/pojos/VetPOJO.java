@@ -6,6 +6,7 @@ public class VetPOJO {
     private String name;
     private String address;
     private String neighborhood;
+    private VisitPOJO visit;
 
     public VetPOJO() {}
 
@@ -15,6 +16,7 @@ public class VetPOJO {
         this.address = address;
         this.neighborhood = neighborhood;
     }
+
 
     public VetPOJO( String name, String address, String neighborhood) {
         this.name = name;

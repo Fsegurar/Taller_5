@@ -7,6 +7,7 @@ public class OwnerPOJO {
     private String name;
     private String address;
     private String neighborhood;
+    private PetPOJO pet;
 
     public OwnerPOJO() {}
 
@@ -17,11 +18,18 @@ public class OwnerPOJO {
         this.address = address;
         this.neighborhood = neighborhood;
     }
+    public OwnerPOJO( String name, String address, String neighborhood,PetPOJO pet) {
+        this.name = name;
+        this.address = address;
+        this.neighborhood = neighborhood;
+
+    }
 
     public OwnerPOJO(String name, String address, String neighborhood) {
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
+        this.pet=pet;
     }
 
     public String getUsername() {
@@ -62,5 +70,13 @@ public class OwnerPOJO {
 
     public void setNeighborhood(String neighborhood) {
         this.neighborhood = neighborhood;
+    }
+
+    public PetPOJO getPet() {
+        return pet;
+    }
+
+    public void setPet(PetPOJO pet) {
+        this.pet = pet;
     }
 }

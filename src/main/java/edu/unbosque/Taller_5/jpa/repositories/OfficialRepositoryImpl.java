@@ -45,7 +45,7 @@ public class OfficialRepositoryImpl implements OfficialRepository{
 
     @Override
     public Optional<Official> editNameByUsername(String username, String name) {
-        Official official = (Official) entityManager.createQuery("UPDATE Official   SET  name = :name  WHERE username = :username")
+        Official official = (Official) entityManager.createQuery("UPDATE Official o  SET  o.name = :name  WHERE o.username = :username")
                 .setParameter("name",name)
                 .setParameter("username",username)
                 .getSingleResult();
