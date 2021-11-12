@@ -57,18 +57,25 @@ public class UserAppRepositoryImpl implements UserAppRepository {
 
     @Override
     public Optional<UserApp> editEmailByUsername(String username, String email) {
+        UserApp userApp = (UserApp) entityManager.createQuery("UPDATE UserApp   SET  email = :email  WHERE username = :username")
+                .setParameter("email",email)
+                .setParameter("username",username)
+                .getSingleResult();
+        return userApp!=null ? Optional.of(userApp) : Optional.empty();
+    }
+
+    /*public Optional<UserApp> editEmailByUsername(String username, String email) {
         try {
             entityManager.getTransaction().begin();
             UserApp userapp = entityManager.find(UserApp.class, username);
             userapp.setEmail(email)
-           // entityManager.update(userapp); // Revisar si esto es obligatorio
+            // entityManager.update(userapp); // Revisar si esto es obligatorio
             entityManager.getTransaction().commit();
             return Optional.of(userapp);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return Optional.empty();
-    }
-
+    }*/
 
 }
