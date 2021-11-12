@@ -64,4 +64,18 @@ public class UserAppRepositoryImpl implements UserAppRepository {
 
     }
 
+    /*public Optional<UserApp> editEmailByUsername(String username, String email) {
+        try {
+            entityManager.getTransaction().begin();
+            UserApp userapp = entityManager.find(UserApp.class, username);
+            userapp.setEmail(email)
+            // entityManager.update(userapp); // Revisar si esto es obligatorio
+            entityManager.getTransaction().commit();
+            return Optional.of(userapp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }*/
+
 }
