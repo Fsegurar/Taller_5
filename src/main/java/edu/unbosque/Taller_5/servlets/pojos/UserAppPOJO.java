@@ -7,6 +7,8 @@ public class UserAppPOJO {
     private String email;
     private String role;
     private OfficialPOJO official;
+    private OwnerPOJO owner;
+    private VetPOJO vet;
 
 
     public UserAppPOJO() {}
@@ -26,6 +28,21 @@ public class UserAppPOJO {
         this.official = official;
     }
 
+    public UserAppPOJO(String username, String password, String email, String role, OwnerPOJO owner) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.owner = owner;
+    }
+
+    public UserAppPOJO(String username, String password, String email, String role, VetPOJO vet) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.vet = vet;
+    }
 
     public String getUsername() {
         return username;
@@ -65,5 +82,21 @@ public class UserAppPOJO {
 
     public void setOfficial(OfficialPOJO official) {
         this.official = official;
+    }
+
+    public OwnerPOJO getOwner() {
+        return owner;
+    }
+
+    public void setOwner(OwnerPOJO owner) {
+        this.owner = owner;
+    }
+
+    public VetPOJO getVet() {
+        return vet;
+    }
+
+    public void setVet(VetPOJO vet) {
+        this.vet = vet;
     }
 }
