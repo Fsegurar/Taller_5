@@ -59,9 +59,10 @@ public class UserAppResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response modify(@PathParam("username") String username, UserAppPOJO userapp){
 
+        Optional<UserAppPOJO> persistedUser = null;
         if(userapp.getEmail()!=null){
 
-            Optional<UserAppPOJO> persistedUser = Optional.of(new UserAppService()
+             persistedUser = Optional.of(new UserAppService()
                     .editEmailByUsername(username, userapp.getEmail()));
         }
 
