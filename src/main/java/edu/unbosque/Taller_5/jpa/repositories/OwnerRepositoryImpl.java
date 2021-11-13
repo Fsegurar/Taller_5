@@ -1,6 +1,7 @@
 package edu.unbosque.Taller_5.jpa.repositories;
 
 import edu.unbosque.Taller_5.jpa.entities.Owner;
+import edu.unbosque.Taller_5.jpa.entities.UserApp;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -57,28 +58,46 @@ public class OwnerRepositoryImpl implements OwnerRepository{
 
     @Override
     public Optional<Owner> editNameByUsername(String username, String name) {
-        Owner owner = (Owner) entityManager.createQuery("UPDATE Owner   SET  name = :name  WHERE username = :username")
-                .setParameter("name",name)
-                .setParameter("username",username)
-                .getSingleResult();
-        return owner!=null ? Optional.of(owner) : Optional.empty();
+        try {
+            entityManager.getTransaction().begin();
+            Owner owner = entityManager.find(Owner.class, username);
+            owner.setName(name);
+
+            entityManager.getTransaction().commit();
+            return Optional.of(owner);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     @Override
     public Optional<Owner> editAddressByUsername(String username, String address) {
-        Owner owner = (Owner) entityManager.createQuery("UPDATE Owner   SET  address = :address  WHERE username = :username")
-                .setParameter("address",address)
-                .setParameter("username",username)
-                .getSingleResult();
-        return owner!=null ? Optional.of(owner) : Optional.empty();
+        try {
+            entityManager.getTransaction().begin();
+            Owner owner = entityManager.find(Owner.class, username);
+            owner.setAddress(address);
+
+            entityManager.getTransaction().commit();
+            return Optional.of(owner);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     @Override
     public Optional<Owner> editNeighborhoodByUsername(String username, String neighborhood) {
-        Owner owner = (Owner) entityManager.createQuery("UPDATE Owner   SET  neighborhood = :neighborhood  WHERE username = :username")
-                .setParameter("neighborhood",neighborhood)
-                .setParameter("username",username)
-                .getSingleResult();
-        return owner!=null ? Optional.of(owner) : Optional.empty();
+        try {
+            entityManager.getTransaction().begin();
+            Owner owner = entityManager.find(Owner.class, username);
+            owner.setNeighborhood(neighborhood);
+
+            entityManager.getTransaction().commit();
+            return Optional.of(owner);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 }

@@ -18,26 +18,25 @@ public class Official implements Serializable {
 
 
     public Official(String name){
+
         this.name = name;
     }
 
-    public Official() {
-
-    }
+    public Official() {}
 
     public UserApp getUsername() {
         return username;
     }
 
-    public void setUsername(UserApp userapp) {
-        this.username = userapp;
+    public void setUsername(UserApp username) {
+        this.username = username;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public  void setName(String name) {
         this.name = name;
     }
 }

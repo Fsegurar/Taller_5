@@ -24,7 +24,7 @@ public class VetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         vetRepository = new VetRepositoryImpl(entityManager);
-        Vet persistedVet = vetRepository.editNameByUsername(username,name).get();
+        vetRepository.editNameByUsername(username,name);
         List<Vet> users = vetRepository.findAll();
 
         entityManager.close();
@@ -43,7 +43,7 @@ public class VetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         vetRepository = new VetRepositoryImpl(entityManager);
-        Vet persistedVet = vetRepository.editAddressByUsername(username,address).get();
+        vetRepository.editAddressByUsername(username,address);
         List<Vet> users = vetRepository.findAll();
 
         entityManager.close();
@@ -62,7 +62,7 @@ public class VetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         vetRepository = new VetRepositoryImpl(entityManager);
-        Vet persistedVet = vetRepository.editNeighborhoodByUsername(username,neighborhood).get();
+        vetRepository.editNeighborhoodByUsername(username,neighborhood);
         List<Vet> users = vetRepository.findAll();
 
         entityManager.close();

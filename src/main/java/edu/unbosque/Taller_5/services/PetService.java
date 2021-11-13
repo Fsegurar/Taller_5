@@ -23,7 +23,7 @@ public class PetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetRepositoryImpl(entityManager);
-        Pet persistedPet = petRepository.editNameByPetId(pet_id,name).get();
+       petRepository.editNameByPetId(pet_id,name);
         List<Pet> users = petRepository.findAll();
 
         entityManager.close();
@@ -43,7 +43,7 @@ public class PetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetRepositoryImpl(entityManager);
-        Pet persistedPet = petRepository.editSpecieByPetId(pet_id,specie).get();
+        petRepository.editSpecieByPetId(pet_id,specie);
         List<Pet> users = petRepository.findAll();
 
         entityManager.close();
@@ -63,7 +63,7 @@ public class PetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetRepositoryImpl(entityManager);
-        Pet persistedPet = petRepository.editRaceByPetId(pet_id,race).get();
+       petRepository.editRaceByPetId(pet_id,race);
         List<Pet> users = petRepository.findAll();
 
         entityManager.close();
@@ -83,7 +83,7 @@ public class PetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetRepositoryImpl(entityManager);
-        Pet persistedPet = petRepository.editSizeByPetId(pet_id,size).get();
+        petRepository.editSizeByPetId(pet_id,size);
         List<Pet> users = petRepository.findAll();
 
         entityManager.close();
@@ -103,7 +103,7 @@ public class PetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetRepositoryImpl(entityManager);
-        Pet persistedPet = petRepository.editSexByPetId(pet_id,sex).get();
+        petRepository.editSexByPetId(pet_id,sex);
         List<Pet> users = petRepository.findAll();
 
         entityManager.close();
@@ -123,7 +123,7 @@ public class PetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetRepositoryImpl(entityManager);
-        Pet persistedPet = petRepository.editPictureByPetId(pet_id,picture).get();
+        petRepository.editPictureByPetId(pet_id,picture);
         List<Pet> users = petRepository.findAll();
 
         entityManager.close();

@@ -34,10 +34,12 @@ public class UserAppResource {
         }else if(userapp.getRole().equals("owner")){
             Optional<OwnerPOJO> persistedOwner = Optional.of(new OwnerService().saveOwner(
                     userapp.getOwner().getName(), userapp.getOwner().getAddress(), userapp.getOwner().getNeighborhood()));
+            persistedOwner.get().setUsername(userapp.getUsername());
             persistedUser.get().setOwner(persistedOwner.get());
         }else if(userapp.getRole().equals("vet")){
             Optional<VetPOJO> persistedVet = Optional.of(new VetService().saveVet(
                     userapp.getOfficial().getName(), userapp.getVet().getAddress(), userapp.getVet().getNeighborhood()));
+            persistedVet.get().setUsername(userapp.getUsername());
             persistedUser.get().setVet(persistedVet.get());
         }
 
@@ -46,11 +48,56 @@ public class UserAppResource {
                     .entity(persistedUser.get())
                     .build();
         } else {
-            return Response.serverError()
-                    .entity("User could not be created")
+            return Response.status(400)
+                    .build();
+        }
+    }
+
+    @PUT
+    @Path("/{username}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response modify(@PathParam("username") String username, UserAppPOJO userapp){
+
+        Optional<UserAppPOJO> persistedUser = null;
+        if(userapp.getEmail()!=null){
+
+             persistedUser = Optional.of(new UserAppService()
+                    .editEmailByUsername(username, userapp.getEmail()));
+        }
+
+        if (userapp.getOfficial()!=null){
+            new OfficialService().editNameByUsername(username, userapp.getOfficial().getName());
+        }else if(userapp.getOwner()!=null){
+            if(userapp.getOwner().getName()!=null){
+                new OwnerService().editNameByUsername(username, userapp.getOwner().getName());
+            }
+            if(userapp.getOwner().getAddress()!=null){
+                new OwnerService().editAddressByUsername(username, userapp.getOwner().getAddress());
+            }
+            if(userapp.getOwner().getNeighborhood()!=null){
+                new OwnerService().editNeighborhoodByUsername(username, userapp.getOwner().getNeighborhood());
+            }
+        }else if(userapp.getVet()!=null){
+            if(userapp.getVet().getName()!=null){
+                new VetService().editNameByUsername(username, userapp.getVet().getName());
+            }
+            if(userapp.getVet().getAddress()!=null){
+                new VetService().editAddressByUsername(username, userapp.getVet().getAddress());
+            }
+            if(userapp.getVet().getNeighborhood()!=null){
+                new VetService().editNeighborhoodByUsername(username, userapp.getVet().getNeighborhood());
+            }
+        }
+
+        if (persistedUser.isPresent()) {
+            return Response.status(Response.Status.OK)
+                    .build();
+        } else {
+            return Response.status(400)
                     .build();
         }
 
-
     }
+
 }

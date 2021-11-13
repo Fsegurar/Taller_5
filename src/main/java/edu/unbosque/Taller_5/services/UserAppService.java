@@ -24,7 +24,7 @@ public class UserAppService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         userappRepository = new UserAppRepositoryImpl(entityManager);
-        UserApp persistedUserApp = userappRepository.editEmailByUsername(username,email).get();
+        userappRepository.editEmailByUsername(username,email);
         List<UserApp> users = userappRepository.findAll();
 
         entityManager.close();

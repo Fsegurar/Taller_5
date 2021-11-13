@@ -1,5 +1,6 @@
 package edu.unbosque.Taller_5.jpa.repositories;
 
+import edu.unbosque.Taller_5.jpa.entities.Pet;
 import edu.unbosque.Taller_5.jpa.entities.Vet;
 
 import javax.persistence.EntityManager;
@@ -51,28 +52,46 @@ public class VetRepositoryImpl implements VetRepository{
 
     @Override
     public Optional<Vet> editNameByUsername(String username, String name) {
-        Vet vet = (Vet) entityManager.createQuery("UPDATE Vet   SET  name = :name  WHERE username = :username")
-                .setParameter("name",name)
-                .setParameter("username",username)
-                .getSingleResult();
-        return vet!=null ? Optional.of(vet) : Optional.empty();
+        try {
+            entityManager.getTransaction().begin();
+            Vet vet = entityManager.find(Vet.class, username);
+            vet.setName(name);
+
+            entityManager.getTransaction().commit();
+            return Optional.of(vet);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     @Override
     public Optional<Vet> editAddressByUsername(String username, String address) {
-        Vet vet = (Vet) entityManager.createQuery("UPDATE Vet   SET  address = :address  WHERE username = :username")
-                .setParameter("address",address)
-                .setParameter("username",username)
-                .getSingleResult();
-        return vet!=null ? Optional.of(vet) : Optional.empty();
+        try {
+            entityManager.getTransaction().begin();
+            Vet vet = entityManager.find(Vet.class, username);
+            vet.setAddress(address);
+
+            entityManager.getTransaction().commit();
+            return Optional.of(vet);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     @Override
     public Optional<Vet> editNeighborhoodByUsername(String username, String neighborhood) {
-        Vet vet = (Vet) entityManager.createQuery("UPDATE Vet   SET  neighborhood = :neighborhood  WHERE username = :username")
-                .setParameter("neighborhood",neighborhood)
-                .setParameter("username",username)
-                .getSingleResult();
-        return vet!=null ? Optional.of(vet) : Optional.empty();
+        try {
+            entityManager.getTransaction().begin();
+            Vet vet = entityManager.find(Vet.class, username);
+            vet.setNeighborhood(neighborhood);
+
+            entityManager.getTransaction().commit();
+            return Optional.of(vet);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 }

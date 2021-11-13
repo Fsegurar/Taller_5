@@ -25,7 +25,7 @@ public class OfficialService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         officialRepository = new OfficialRepositoryImpl(entityManager);
-        Official persistedOfficial = officialRepository.editNameByUsername(username,name).get();
+        officialRepository.editNameByUsername(username,name);
         List<Official> users = officialRepository.findAll();
 
         entityManager.close();

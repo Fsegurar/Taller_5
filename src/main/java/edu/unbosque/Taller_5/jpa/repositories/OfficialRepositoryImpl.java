@@ -45,11 +45,17 @@ public class OfficialRepositoryImpl implements OfficialRepository{
 
     @Override
     public Optional<Official> editNameByUsername(String username, String name) {
-        Official official = (Official) entityManager.createQuery("UPDATE Official o  SET  o.name = :name  WHERE o.username = :username")
-                .setParameter("name",name)
-                .setParameter("username",username)
-                .getSingleResult();
-        return official!=null ? Optional.of(official) : Optional.empty();
+        try {
+            entityManager.getTransaction().begin();
+            Official official = entityManager.find(Official.class, username);
+            official.setName(name);
+
+            entityManager.getTransaction().commit();
+            return Optional.of(official);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
 }

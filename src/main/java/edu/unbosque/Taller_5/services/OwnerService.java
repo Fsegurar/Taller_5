@@ -22,7 +22,7 @@ public class OwnerService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerRepositoryImpl(entityManager);
-        Owner persistedOwner = ownerRepository.editNameByUsername(username,name).get();
+       ownerRepository.editNameByUsername(username,name);
         List<Owner> users = ownerRepository.findAll();
 
         entityManager.close();
@@ -41,7 +41,7 @@ public class OwnerService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerRepositoryImpl(entityManager);
-        Owner persistedOwner = ownerRepository.editAddressByUsername(username,address).get();
+        ownerRepository.editAddressByUsername(username,address);
         List<Owner> users = ownerRepository.findAll();
 
         entityManager.close();
@@ -60,7 +60,7 @@ public class OwnerService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerRepositoryImpl(entityManager);
-        Owner persistedOwner = ownerRepository.editNeighborhoodByUsername(username,neighborhood).get();
+        ownerRepository.editNeighborhoodByUsername(username,neighborhood);
 
         List<Owner> users = ownerRepository.findAll();
 
