@@ -9,13 +9,11 @@ public class Official implements Serializable {
 
     @Id
     @OneToOne
-    @JoinColumn(name = "username")
+    @JoinColumn(name = "username", nullable = false)
     private UserApp username;
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name")
     private String name;
-
-
 
     public Official(String name){
 

@@ -25,4 +25,5 @@ public interface OwnerRepository {
 
     Optional<Owner> editNeighborhoodByUsername(String username,String neighborhood);
 
+    Optional<Owner> findByUsername(String username);
 }

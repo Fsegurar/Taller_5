@@ -20,13 +20,13 @@ public class UserApp {
     @Column(name = "role",nullable = false)
     private String role;
 
-    @OneToOne(mappedBy = "username")
+    @OneToOne(mappedBy = "username", cascade = CascadeType.ALL)
     private Official official;
 
-    @OneToOne(mappedBy = "username")
+    @OneToOne(mappedBy = "username", cascade = CascadeType.ALL)
     private Owner owner;
 
-    @OneToOne(mappedBy = "username")
+    @OneToOne(mappedBy = "username", cascade = CascadeType.ALL)
     private Vet vet;
 
     public UserApp(){}

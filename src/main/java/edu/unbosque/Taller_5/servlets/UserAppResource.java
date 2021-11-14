@@ -12,10 +12,9 @@ import edu.unbosque.Taller_5.servlets.pojos.VetPOJO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import javax.xml.registry.infomodel.User;
 import java.util.Optional;
 
-@Path("/userapp")
+@Path("/users")
 public class UserAppResource {
 
     @POST
@@ -28,24 +27,25 @@ public class UserAppResource {
 
         if (userapp.getRole().equals("official")){
             Optional<OfficialPOJO> persistedOfficial = Optional.of(new OfficialService().saveOfficial(
-                    userapp.getOfficial().getName()));
+                    userapp.getUsername(), userapp.getOfficial().getName()));
             persistedOfficial.get().setUsername(userapp.getUsername());
             persistedUser.get().setOfficial(persistedOfficial.get());
         }else if(userapp.getRole().equals("owner")){
             Optional<OwnerPOJO> persistedOwner = Optional.of(new OwnerService().saveOwner(
-                    userapp.getOwner().getName(), userapp.getOwner().getAddress(), userapp.getOwner().getNeighborhood()));
+                    userapp.getUsername(), userapp.getOwner().getName(),
+                    userapp.getOwner().getAddress(), userapp.getOwner().getNeighborhood()));
             persistedOwner.get().setUsername(userapp.getUsername());
             persistedUser.get().setOwner(persistedOwner.get());
         }else if(userapp.getRole().equals("vet")){
             Optional<VetPOJO> persistedVet = Optional.of(new VetService().saveVet(
-                    userapp.getOfficial().getName(), userapp.getVet().getAddress(), userapp.getVet().getNeighborhood()));
+                    userapp.getUsername(), userapp.getVet().getName(), userapp.getVet().getAddress(),
+                    userapp.getVet().getNeighborhood()));
             persistedVet.get().setUsername(userapp.getUsername());
             persistedUser.get().setVet(persistedVet.get());
         }
 
         if (persistedUser.isPresent()) {
             return Response.status(Response.Status.CREATED)
-                    .entity(persistedUser.get())
                     .build();
         } else {
             return Response.status(400)
@@ -61,7 +61,6 @@ public class UserAppResource {
 
         Optional<UserAppPOJO> persistedUser = null;
         if(userapp.getEmail()!=null){
-
              persistedUser = Optional.of(new UserAppService()
                     .editEmailByUsername(username, userapp.getEmail()));
         }

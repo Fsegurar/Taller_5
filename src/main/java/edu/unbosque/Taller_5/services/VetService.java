@@ -1,9 +1,11 @@
 package edu.unbosque.Taller_5.services;
 
+import edu.unbosque.Taller_5.jpa.entities.Owner;
 import edu.unbosque.Taller_5.jpa.entities.Pet;
+import edu.unbosque.Taller_5.jpa.entities.UserApp;
 import edu.unbosque.Taller_5.jpa.entities.Vet;
-import edu.unbosque.Taller_5.jpa.repositories.VetRepository;
-import edu.unbosque.Taller_5.jpa.repositories.VetRepositoryImpl;
+import edu.unbosque.Taller_5.jpa.repositories.*;
+import edu.unbosque.Taller_5.servlets.pojos.OwnerPOJO;
 import edu.unbosque.Taller_5.servlets.pojos.PetPOJO;
 import edu.unbosque.Taller_5.servlets.pojos.VetPOJO;
 
@@ -13,10 +15,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class VetService {
 
+    UserAppRepository userRepository;
     VetRepository vetRepository;
 
     public VetPOJO editNameByUsername(String username,String name){
@@ -25,35 +29,27 @@ public class VetService {
 
         vetRepository = new VetRepositoryImpl(entityManager);
         vetRepository.editNameByUsername(username,name);
-        List<Vet> users = vetRepository.findAll();
 
         entityManager.close();
         entityManagerFactory.close();
-        VetPOJO vetPOJO = new VetPOJO();
-        for (Vet user : users) {
-            if (user.getUsername().equals(username)){
-                vetPOJO = new VetPOJO(user.getUsername().getUsername(),user.getName(),user.getAddress(),user.getNeighborhood());
-            }
-        }
+
+        Vet vet = findByUsername(username);
+        VetPOJO vetPOJO = new VetPOJO(vet.getUsername().getUsername(),vet.getName(),vet.getAddress(),vet.getNeighborhood());
 
         return vetPOJO;
     }
+
     public VetPOJO editAddressByUsername(String username,String address){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         vetRepository = new VetRepositoryImpl(entityManager);
         vetRepository.editAddressByUsername(username,address);
-        List<Vet> users = vetRepository.findAll();
-
         entityManager.close();
         entityManagerFactory.close();
-        VetPOJO vetPOJO = new VetPOJO();
-        for (Vet user : users) {
-            if (user.getUsername().equals(username)){
-                vetPOJO = new VetPOJO(user.getUsername().getUsername(),user.getName(),user.getAddress(),user.getNeighborhood());
-            }
-        }
+
+        Vet vet = findByUsername(username);
+        VetPOJO vetPOJO = new VetPOJO(vet.getUsername().getUsername(),vet.getName(),vet.getAddress(),vet.getNeighborhood());
 
         return vetPOJO;
     }
@@ -63,19 +59,28 @@ public class VetService {
 
         vetRepository = new VetRepositoryImpl(entityManager);
         vetRepository.editNeighborhoodByUsername(username,neighborhood);
-        List<Vet> users = vetRepository.findAll();
-
         entityManager.close();
         entityManagerFactory.close();
-        VetPOJO vetPOJO = new VetPOJO();
-        for (Vet user : users) {
-            if (user.getUsername().equals(username)){
-                vetPOJO = new VetPOJO(user.getUsername().getUsername(),user.getName(),user.getAddress(),user.getNeighborhood());
-            }
-        }
+
+        Vet vet = findByUsername(username);
+        VetPOJO vetPOJO = new VetPOJO(vet.getUsername().getUsername(),vet.getName(),vet.getAddress(),vet.getNeighborhood());
 
         return vetPOJO;
     }
+
+    public Vet findByUsername(String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        vetRepository = new VetRepositoryImpl(entityManager);
+        Vet persistedVet = vetRepository.findByUsername(username).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedVet;
+    }
+
     public Vet findByName(String name){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -102,7 +107,7 @@ public class VetService {
         return persistedVet;
     }
 
-    public  Vet findeByNeighborhood(String neighborhood){
+    public  Vet findByNeighborhood(String neighborhood){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
@@ -137,19 +142,25 @@ public class VetService {
         return vetPOJO;
     }
 
-    public VetPOJO saveVet(String name, String address, String neighborhood){
+    public VetPOJO saveVet(String username, String name, String address, String neighborhood){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller_5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
+        userRepository = new UserAppRepositoryImpl(entityManager);
         vetRepository = new VetRepositoryImpl(entityManager);
 
-        Vet vet = new Vet(name,address,neighborhood);
-         vetRepository.save(vet);
+        Optional<UserApp> user = userRepository.findByUsername(username);
+        user.ifPresent(u ->{
+            Vet vet = new Vet(name,address,neighborhood);
+            vet.setUsername(user.get());
+            u.setVet(vet);
+            userRepository.save(u);
+        });
 
         entityManager.close();
         entityManagerFactory.close();
 
-        VetPOJO vetPOJO= new VetPOJO(name,address,neighborhood);
+        VetPOJO vetPOJO = new VetPOJO(name,address,neighborhood);
 
         return vetPOJO;
     }

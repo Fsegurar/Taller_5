@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface VetRepository {
 
+    Optional<Vet> findByUsername(String username);
+
     Optional<Vet> findByName(String name);
 
     Optional<Vet> findByAddress(String Address);

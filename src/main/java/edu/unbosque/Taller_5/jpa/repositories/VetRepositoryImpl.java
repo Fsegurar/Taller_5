@@ -16,14 +16,20 @@ public class VetRepositoryImpl implements VetRepository{
     }
 
     @Override
+    public Optional<Vet> findByUsername(String username) {
+        Vet vet = entityManager.find(Vet.class,username);
+        return vet!=null ? Optional.of(vet) : Optional.empty();
+    }
+
+    @Override
     public Optional<Vet> findByName(String name) {
         Vet vet = entityManager.find(Vet.class,name);
         return vet!=null ? Optional.of(vet) : Optional.empty();
     }
 
     @Override
-    public Optional<Vet> findByAddress(String Adress) {
-        Vet vet = entityManager.find(Vet.class,Adress);
+    public Optional<Vet> findByAddress(String address) {
+        Vet vet = entityManager.find(Vet.class,address);
         return vet!=null ? Optional.of(vet) : Optional.empty();
     }
 

@@ -1,7 +1,6 @@
 package edu.unbosque.Taller_5.jpa.repositories;
 
 import edu.unbosque.Taller_5.jpa.entities.Owner;
-import edu.unbosque.Taller_5.jpa.entities.UserApp;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -99,5 +98,11 @@ public class OwnerRepositoryImpl implements OwnerRepository{
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    @Override
+    public Optional<Owner> findByUsername(String username) {
+        Owner owner = entityManager.find(Owner.class,username);
+        return owner!=null ? Optional.of(owner) : Optional.empty();
     }
 }
