@@ -14,17 +14,17 @@ public class Vet implements Serializable {
     @JoinColumn(name = "username")
     private UserApp username;
 
-    @Column(name = "name",nullable = false, unique = true)
+    @Column(name = "name", unique = true)
     private String name;
 
-    @Column(name = "address",nullable = false)
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "neighborhood",nullable = false)
+    @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "vet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Visit> visits = new ArrayList<>();
+    @OneToMany(mappedBy = "vet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Visit> visits;
 
     public Vet(){}
 

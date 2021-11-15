@@ -18,18 +18,27 @@ public class OwnerPOJO {
         this.address = address;
         this.neighborhood = neighborhood;
     }
-    public OwnerPOJO( String name, String address, String neighborhood,PetPOJO pet) {
+
+    public OwnerPOJO(String username, Integer person_id, String name, String address, String neighborhood, PetPOJO pet) {
+        this.username = username;
+        this.person_id = person_id;
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
+        this.pet = pet;
+    }
 
+    public OwnerPOJO( String name, String address, String neighborhood, PetPOJO pet) {
+        this.name = name;
+        this.address = address;
+        this.neighborhood = neighborhood;
+        this.pet=pet;
     }
 
     public OwnerPOJO(String name, String address, String neighborhood) {
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
-        this.pet=pet;
     }
 
     public String getUsername() {

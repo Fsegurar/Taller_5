@@ -11,13 +11,13 @@ public class UserApp {
     @Column(name = "username",nullable = false)
     private String username;
 
-    @Column(name = "password",nullable = false)
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "email",nullable = false)
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "role",nullable = false)
+    @Column(name = "role")
     private String role;
 
     @OneToOne(mappedBy = "username", cascade = CascadeType.ALL)
@@ -28,6 +28,13 @@ public class UserApp {
 
     @OneToOne(mappedBy = "username", cascade = CascadeType.ALL)
     private Vet vet;
+
+    @PreUpdate
+    private void onUpdate(){
+        owner=null;
+        official=null;
+        vet=null;
+    }
 
     public UserApp(){}
 

@@ -1,9 +1,10 @@
 package edu.unbosque.Taller_5.jpa.entities;
 
+
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Pet")
@@ -36,14 +37,14 @@ public class Pet implements Serializable {
     private String picture;
 
     @ManyToOne
-    @JoinColumn(name = "person_id")
+    @JoinColumn(name = "owner_id", referencedColumnName = "person_id", unique = true)
     private Owner owner;
 
-    @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Visit> visits = new ArrayList<>();
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
+    private Set<Visit> visits ;
 
-    @OneToMany(mappedBy = "pet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<PetCase> cases = new ArrayList<>();
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
+    private Set<PetCase> cases ;
 
 
 
@@ -67,19 +68,19 @@ public class Pet implements Serializable {
         this.sex = sex;
     }
 
-    public List<Visit> getVisits() {
+    public Set<Visit> getVisits() {
         return visits;
     }
 
-    public void setVisits(List<Visit> visits) {
+    public void setVisits(Set<Visit> visits) {
         this.visits = visits;
     }
 
-    public List<PetCase> getCases() {
+    public Set<PetCase> getCases() {
         return cases;
     }
 
-    public void setCases(List<PetCase> cases) {
+    public void setCases(Set<PetCase> cases) {
         this.cases = cases;
     }
 
@@ -146,5 +147,6 @@ public class Pet implements Serializable {
     public void setOwner(Owner owner) {
         this.owner = owner;
     }
+
 }
 

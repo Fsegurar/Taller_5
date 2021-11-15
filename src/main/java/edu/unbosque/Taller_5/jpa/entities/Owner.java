@@ -1,9 +1,11 @@
 package edu.unbosque.Taller_5.jpa.entities;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Owner")
@@ -14,27 +16,37 @@ public class Owner implements Serializable {
     @JoinColumn(name = "username")
     private UserApp username;
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, unique = true, name = "person_id")
     private Integer person_id;
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "address",nullable = false)
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "neighborhood",nullable = false)
+    @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Pet> pets = new ArrayList<>();
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<Pet> pets;
 
-    public Owner() {
-
+    @PreUpdate
+    private void onUpdate(){
+        pets=null;
     }
 
+    public Owner() {}
+
     public Owner( String name, String address, String neighborhood) {
+        this.name = name;
+        this.address = address;
+        this.neighborhood = neighborhood;
+    }
+
+    public Owner(Integer person_id, String name, String address, String neighborhood) {
+        this.person_id = person_id;
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
@@ -86,5 +98,10 @@ public class Owner implements Serializable {
 
     public void setNeighborhood(String neighborhood) {
         this.neighborhood = neighborhood;
+    }
+
+    public void addPet(Pet pet) {
+        pets.add(pet);
+        pet.setOwner(this);
     }
 }

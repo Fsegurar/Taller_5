@@ -1,6 +1,9 @@
 package edu.unbosque.Taller_5.services;
 
+import edu.unbosque.Taller_5.jpa.entities.Owner;
 import edu.unbosque.Taller_5.jpa.entities.Pet;
+import edu.unbosque.Taller_5.jpa.repositories.OwnerRepository;
+import edu.unbosque.Taller_5.jpa.repositories.OwnerRepositoryImpl;
 import edu.unbosque.Taller_5.jpa.repositories.PetRepository;
 import edu.unbosque.Taller_5.jpa.repositories.PetRepositoryImpl;
 import edu.unbosque.Taller_5.servlets.pojos.PetPOJO;
@@ -16,6 +19,7 @@ import java.util.Optional;
 @Stateless
 public class PetService {
 
+    OwnerRepository ownerRepository;
     PetRepository petRepository;
 
     public PetPOJO editNameByPetId(Integer pet_id, String name){
@@ -23,7 +27,7 @@ public class PetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetRepositoryImpl(entityManager);
-       petRepository.editNameByPetId(pet_id,name);
+        petRepository.editNameByPetId(pet_id,name);
         List<Pet> users = petRepository.findAll();
 
         entityManager.close();
@@ -260,14 +264,19 @@ public class PetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetRepositoryImpl(entityManager);
+        ownerRepository = new OwnerRepositoryImpl(entityManager);
 
-        Pet pet = new Pet(microchip,name,species,sex,race,size,picture);
-        petRepository.save(pet);
+        Optional<Owner> owner = ownerRepository.findByOwnerId(owner_id);
+
+        owner.ifPresent(o -> {
+            o.addPet( new Pet(microchip,name,species,sex,race,size,picture));
+            ownerRepository.save(o);
+        });
 
         entityManager.close();
         entityManagerFactory.close();
+        PetPOJO petPOJO = new PetPOJO(listPets().size(), microchip, name, species,race,size,sex,picture,owner_id);
 
-        PetPOJO petPOJO = new PetPOJO(microchip,name,species,sex,race,size,picture);
         return petPOJO;
     }
 }

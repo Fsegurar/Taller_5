@@ -68,8 +68,9 @@ public class UserAppResource {
         if (userapp.getOfficial()!=null){
             new OfficialService().editNameByUsername(username, userapp.getOfficial().getName());
         }else if(userapp.getOwner()!=null){
+            Optional<OwnerPOJO> persistedOwner=null;
             if(userapp.getOwner().getName()!=null){
-                new OwnerService().editNameByUsername(username, userapp.getOwner().getName());
+                persistedOwner = Optional.of(new OwnerService().editNameByUsername(username, userapp.getOwner().getName()));
             }
             if(userapp.getOwner().getAddress()!=null){
                 new OwnerService().editAddressByUsername(username, userapp.getOwner().getAddress());
@@ -77,6 +78,7 @@ public class UserAppResource {
             if(userapp.getOwner().getNeighborhood()!=null){
                 new OwnerService().editNeighborhoodByUsername(username, userapp.getOwner().getNeighborhood());
             }
+            persistedUser.get().setOwner(persistedOwner.get());
         }else if(userapp.getVet()!=null){
             if(userapp.getVet().getName()!=null){
                 new VetService().editNameByUsername(username, userapp.getVet().getName());
@@ -91,6 +93,7 @@ public class UserAppResource {
 
         if (persistedUser.isPresent()) {
             return Response.status(Response.Status.OK)
+                    .entity(persistedUser.get())
                     .build();
         } else {
             return Response.status(400)

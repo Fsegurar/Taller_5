@@ -167,6 +167,7 @@ public class OwnerService {
             Owner owner = new Owner(name,address,neighborhood);
             owner.setUsername(user.get());
             owner.setPerson_id(listOwners().size()+1);
+            owner.setPets(null);
             u.setOwner(owner);
             userRepository.save(u);
         });

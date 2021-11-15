@@ -62,7 +62,7 @@ public class UserAppRepositoryImpl implements UserAppRepository {
             entityManager.getTransaction().begin();
             UserApp userapp = entityManager.find(UserApp.class, username);
             userapp.setEmail(email);
-            
+
             entityManager.getTransaction().commit();
             return Optional.of(userapp);
         } catch (Exception e) {

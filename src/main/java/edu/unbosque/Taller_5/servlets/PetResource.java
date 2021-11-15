@@ -22,7 +22,6 @@ public class PetResource {
 
         if (persistedPet.isPresent()) {
             return Response.status(Response.Status.CREATED)
-                    .entity(persistedPet.get())
                     .build();
         } else {
             return Response.status(400)
