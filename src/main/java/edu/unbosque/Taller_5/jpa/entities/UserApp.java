@@ -31,10 +31,15 @@ public class UserApp {
 
     @PreUpdate
     private void onUpdate(){
-        owner=null;
-        official=null;
-        vet=null;
+        if(owner!=null){
+            owner.setPets(null);
+        }
+        if(vet!=null){
+            vet.setVisits(null);
+        }
+
     }
+
 
     public UserApp(){}
 

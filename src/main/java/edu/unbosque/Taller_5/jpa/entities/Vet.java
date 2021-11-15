@@ -14,7 +14,7 @@ public class Vet implements Serializable {
     @JoinColumn(name = "username")
     private UserApp username;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name")
     private String name;
 
     @Column(name = "address")
@@ -23,8 +23,15 @@ public class Vet implements Serializable {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "vet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "vet", cascade = CascadeType.REFRESH)
     private List<Visit> visits;
+
+    @PreUpdate
+    private void onUpdate(){
+        if(visits!=null){
+            visits=null;
+        }
+    }
 
     public Vet(){}
 

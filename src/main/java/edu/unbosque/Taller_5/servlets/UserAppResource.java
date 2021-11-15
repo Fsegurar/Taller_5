@@ -66,29 +66,33 @@ public class UserAppResource {
         }
 
         if (userapp.getOfficial()!=null){
-            new OfficialService().editNameByUsername(username, userapp.getOfficial().getName());
+            Optional<OfficialPOJO> persistedOfficial=null;
+            persistedOfficial = Optional.of(new OfficialService().editNameByUsername(username, userapp.getOfficial().getName()));
+            persistedUser.get().setOfficial(persistedOfficial.get());
         }else if(userapp.getOwner()!=null){
             Optional<OwnerPOJO> persistedOwner=null;
             if(userapp.getOwner().getName()!=null){
                 persistedOwner = Optional.of(new OwnerService().editNameByUsername(username, userapp.getOwner().getName()));
             }
             if(userapp.getOwner().getAddress()!=null){
-                new OwnerService().editAddressByUsername(username, userapp.getOwner().getAddress());
+                persistedOwner = Optional.of(new OwnerService().editAddressByUsername(username, userapp.getOwner().getAddress()));
             }
             if(userapp.getOwner().getNeighborhood()!=null){
-                new OwnerService().editNeighborhoodByUsername(username, userapp.getOwner().getNeighborhood());
+                persistedOwner = Optional.of(new OwnerService().editNeighborhoodByUsername(username, userapp.getOwner().getNeighborhood()));
             }
             persistedUser.get().setOwner(persistedOwner.get());
         }else if(userapp.getVet()!=null){
+            Optional<VetPOJO> persistedVet=null;
             if(userapp.getVet().getName()!=null){
-                new VetService().editNameByUsername(username, userapp.getVet().getName());
+                persistedVet = Optional.of(new VetService().editNameByUsername(username, userapp.getVet().getName()));
             }
             if(userapp.getVet().getAddress()!=null){
-                new VetService().editAddressByUsername(username, userapp.getVet().getAddress());
+                persistedVet = Optional.of(new VetService().editAddressByUsername(username, userapp.getVet().getAddress()));
             }
             if(userapp.getVet().getNeighborhood()!=null){
-                new VetService().editNeighborhoodByUsername(username, userapp.getVet().getNeighborhood());
+                persistedVet = Optional.of(new VetService().editNeighborhoodByUsername(username, userapp.getVet().getNeighborhood()));
             }
+            persistedUser.get().setVet(persistedVet.get());
         }
 
         if (persistedUser.isPresent()) {
