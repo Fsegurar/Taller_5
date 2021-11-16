@@ -1,6 +1,7 @@
 package edu.unbosque.Taller_5.jpa.repositories;
 
 import edu.unbosque.Taller_5.jpa.entities.UserApp;
+import edu.unbosque.Taller_5.servlets.pojos.UserAppPOJO;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -14,6 +15,11 @@ public class UserAppRepositoryImpl implements UserAppRepository {
         this.entityManager = entityManager;
     }
 
+    @Override
+    public Optional<UserApp> findByRole(String role) {
+        UserApp userApp = entityManager.find(UserApp.class,role);
+        return userApp!=null ? Optional.of(userApp) : Optional.empty();
+    }
     @Override
     public Optional<UserApp> findByUsername(String username) {
         UserApp userApp = entityManager.find(UserApp.class,username);

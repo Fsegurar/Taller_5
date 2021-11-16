@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class PetCase implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "case_id",nullable = false)
     private Integer case_id;
 
@@ -22,7 +22,7 @@ public class PetCase implements Serializable {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "pet_id")
+    @JoinColumn(name = "pet_id", referencedColumnName = "pet_id", unique = true)
     private Pet pet;
 
     public PetCase(String created_at, String type, String description) {

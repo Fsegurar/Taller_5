@@ -1,9 +1,9 @@
 package edu.unbosque.Taller_5.jpa.entities;
 
-
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,26 +11,26 @@ import java.util.Set;
 public class Pet implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pet_id")
     private Integer pet_id;
 
     @Column(name = "microchip", unique = true)
     private String microchip;
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "species",nullable = false)
+    @Column(name = "species")
     private String species;
 
-    @Column(name = "race",nullable = false)
+    @Column(name = "race")
     private String race;
 
-    @Column(name = "size",nullable = false)
+    @Column(name = "size")
     private String size;
 
-    @Column(name = "sex",nullable = false)
+    @Column(name = "sex")
     private String sex;
 
     @Column(name = "picture")
@@ -40,12 +40,16 @@ public class Pet implements Serializable {
     @JoinColumn(name = "owner_id", referencedColumnName = "person_id", unique = true)
     private Owner owner;
 
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Visit> visits ;
 
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
-    private Set<PetCase> cases ;
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.MERGE)
+    private List<PetCase> cases = new ArrayList<>();
 
+    @PreUpdate
+    private void onUpdate(){
+        owner.setPets(null);
+    }
 
 
     public Pet(String microchip, String name, String species,String sex, String race, String size, String picture) {
@@ -59,6 +63,16 @@ public class Pet implements Serializable {
     }
 
     public Pet(){}
+
+    public void addPetCase(PetCase petcase) {
+        cases.add(petcase);
+        petcase.setPet(this);
+    }
+
+    public void addVisit(Visit visit) {
+        visits.add(visit);
+        visit.setPet(this);
+    }
 
     public String getSex() {
         return sex;
@@ -76,11 +90,11 @@ public class Pet implements Serializable {
         this.visits = visits;
     }
 
-    public Set<PetCase> getCases() {
+    public List<PetCase> getCases() {
         return cases;
     }
 
-    public void setCases(Set<PetCase> cases) {
+    public void setCases(List<PetCase> cases) {
         this.cases = cases;
     }
 

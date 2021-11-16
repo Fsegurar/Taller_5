@@ -23,7 +23,7 @@ public class Vet implements Serializable {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "vet", cascade = CascadeType.REFRESH)
+    @OneToMany(mappedBy = "vet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Visit> visits;
 
     @PreUpdate

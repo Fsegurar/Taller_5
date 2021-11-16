@@ -1,10 +1,8 @@
 package edu.unbosque.Taller_5.services;
 
-import edu.unbosque.Taller_5.jpa.entities.Owner;
-import edu.unbosque.Taller_5.jpa.entities.Pet;
-import edu.unbosque.Taller_5.jpa.entities.UserApp;
-import edu.unbosque.Taller_5.jpa.entities.Vet;
+import edu.unbosque.Taller_5.jpa.entities.*;
 import edu.unbosque.Taller_5.jpa.repositories.*;
+import edu.unbosque.Taller_5.servlets.pojos.OfficialPOJO;
 import edu.unbosque.Taller_5.servlets.pojos.OwnerPOJO;
 import edu.unbosque.Taller_5.servlets.pojos.PetPOJO;
 import edu.unbosque.Taller_5.servlets.pojos.VetPOJO;
@@ -86,8 +84,13 @@ public class VetService {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         vetRepository = new VetRepositoryImpl(entityManager);
-        Vet persistedVet = vetRepository.findByName(name).get();
-
+        Vet persistedVet=null;
+        List<Vet> vets = vetRepository.findAll();
+        for (Vet vet : vets) {
+            if(vet.getName().equals(name)){
+                persistedVet = vet;
+            }
+        }
         entityManager.close();
         entityManagerFactory.close();
 

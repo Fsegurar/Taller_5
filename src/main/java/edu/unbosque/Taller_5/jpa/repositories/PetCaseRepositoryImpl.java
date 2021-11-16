@@ -42,7 +42,9 @@ public class PetCaseRepositoryImpl implements PetCaseRepository{
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(petCase);
+            //entityManager.clear();
             entityManager.getTransaction().commit();
+            entityManager.close();
             return Optional.of(petCase);
         } catch (Exception e) {
             e.printStackTrace();

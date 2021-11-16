@@ -79,7 +79,7 @@ public class PetRepositoryImpl implements PetRepository{
     public Optional<Pet> editNameByPetId(Integer pet_id, String name) {
         try {
             entityManager.getTransaction().begin();
-            Pet pet = entityManager.find(Pet.class, pet_id);
+            Pet pet = findByPetId(pet_id).get();
             pet.setName(name);
 
             entityManager.getTransaction().commit();
@@ -157,6 +157,20 @@ public class PetRepositoryImpl implements PetRepository{
             Pet pet = entityManager.find(Pet.class, pet_id);
             pet.setPicture(picture);
 
+            entityManager.getTransaction().commit();
+            return Optional.of(pet);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Pet> editMicrochipByPetId(Integer pet_id, String microchip) {
+       try {
+            entityManager.getTransaction().begin();
+            Pet pet = entityManager.find(Pet.class, pet_id);
+            pet.setMicrochip(microchip);
             entityManager.getTransaction().commit();
             return Optional.of(pet);
         } catch (Exception e) {

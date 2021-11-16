@@ -1,8 +1,11 @@
 package edu.unbosque.Taller_5.services;
 
+import edu.unbosque.Taller_5.jpa.entities.Pet;
 import edu.unbosque.Taller_5.jpa.entities.PetCase;
 import edu.unbosque.Taller_5.jpa.repositories.PetCaseRepository;
 import edu.unbosque.Taller_5.jpa.repositories.PetCaseRepositoryImpl;
+import edu.unbosque.Taller_5.jpa.repositories.PetRepository;
+import edu.unbosque.Taller_5.jpa.repositories.PetRepositoryImpl;
 import edu.unbosque.Taller_5.servlets.pojos.PetCasePOJO;
 
 import javax.ejb.Stateless;
@@ -11,9 +14,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class PetCaseService {
+
+    PetRepository petRepository;
     PetCaseRepository petCaseRepository;
 
     public PetCase findByCaseId(Integer case_id){
@@ -77,7 +83,7 @@ public class PetCaseService {
         }
         return petCasePOJO;
     }
-    public PetCasePOJO savePetCase(String created_at, String type, String description){
+    public PetCasePOJO savePetCase(String created_at, String type, String description, Integer pet_id){
         if (type.equalsIgnoreCase("perdida") || type.equalsIgnoreCase("pérdida") || type.equalsIgnoreCase("robo ") || type.equalsIgnoreCase("fallecimiento")) {
 
 
@@ -85,9 +91,17 @@ public class PetCaseService {
             EntityManager entityManager = entityManagerFactory.createEntityManager();
 
             petCaseRepository = new PetCaseRepositoryImpl(entityManager);
+            petRepository = new PetRepositoryImpl(entityManager);
 
-            PetCase petCase = new PetCase(created_at, type, description);
-            petCaseRepository.save(petCase);
+            /*
+            Optional<Pet> pet = petRepository.findByPetId(pet_id);
+
+            pet.ifPresent(p -> {
+                p.addPetCase(new PetCase(created_at, type, description));
+                petRepository.save(p);
+            });
+             */
+            petCaseRepository.save(new PetCase(created_at, type, description));
 
             entityManager.close();
             entityManagerFactory.close();

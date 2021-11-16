@@ -1,5 +1,7 @@
 package edu.unbosque.Taller_5.servlets.pojos;
 
+import edu.unbosque.Taller_5.jpa.entities.Pet;
+
 public class VisitPOJO {
 
     private Integer visit_id;
@@ -8,6 +10,7 @@ public class VisitPOJO {
     private String description;
     private String vet_id;
     private Integer pet_id;
+    private Pet pet;
 
     public VisitPOJO() {}
 
@@ -24,6 +27,24 @@ public class VisitPOJO {
         this.created_at = created_at;
         this.type = type;
         this.description = description;
+    }
+
+    public VisitPOJO(Integer visit_id, String created_at, String type, String description, String vet_id, Integer pet_id, Pet pet) {
+        this.visit_id = visit_id;
+        this.created_at = created_at;
+        this.type = type;
+        this.description = description;
+        this.vet_id = vet_id;
+        this.pet_id = pet_id;
+        this.pet = pet;
+    }
+
+    public Pet getPet() {
+        return pet;
+    }
+
+    public void setPet(Pet pet) {
+        this.pet = pet;
     }
 
     public Integer getVisit_id() {
