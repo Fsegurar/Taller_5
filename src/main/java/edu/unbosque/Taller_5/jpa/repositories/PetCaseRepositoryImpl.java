@@ -22,14 +22,18 @@ public class PetCaseRepositoryImpl implements PetCaseRepository{
 
     @Override
     public Optional<PetCase> findByType(String type) {
-        PetCase petCase = entityManager.find(PetCase.class,type);
-        return petCase!=null ? Optional.of(petCase) : Optional.empty();
+        PetCase petCase = entityManager.createQuery("SELECT b FROM PetCase b WHERE b.type = :type", PetCase.class)
+                .setParameter("type", type)
+                .getSingleResult();
+        return petCase != null ? Optional.of(petCase) : Optional.empty();
     }
 
     @Override
     public Optional<PetCase> findByPetId(Integer pet_id) {
-        PetCase petCase = entityManager.find(PetCase.class,pet_id);
-        return petCase!=null ? Optional.of(petCase) : Optional.empty();
+        PetCase petCase = entityManager.createQuery("SELECT b FROM PetCase b WHERE b.pet = :pet_id", PetCase.class)
+                .setParameter("pet_id", pet_id)
+                .getSingleResult();
+        return petCase != null ? Optional.of(petCase) : Optional.empty();
     }
 
     @Override

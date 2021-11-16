@@ -23,8 +23,10 @@ public class OfficialRepositoryImpl implements OfficialRepository{
 
     @Override
     public Optional<Official> findByName(String name) {
-        Official official =entityManager.find(Official.class,name);
-        return official!=null ? Optional.of(official) : Optional.empty();
+        Official visit = entityManager.createQuery("SELECT b FROM Official b WHERE b.name = :name", Official.class)
+                .setParameter("name", name)
+                .getSingleResult();
+        return visit != null ? Optional.of(visit) : Optional.empty();
     }
 
     @Override

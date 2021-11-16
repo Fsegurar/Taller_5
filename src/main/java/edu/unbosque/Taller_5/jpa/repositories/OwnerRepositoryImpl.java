@@ -16,26 +16,33 @@ public class OwnerRepositoryImpl implements OwnerRepository{
 
     @Override
     public Optional<Owner> findByOwnerId(Integer owner_id) {
-        Owner owner = entityManager.find(Owner.class,owner_id);
-        return owner!=null ? Optional.of(owner) : Optional.empty();
+        Owner visit = entityManager.createQuery("SELECT b FROM Owner b WHERE b.person_id = :owner_id", Owner.class)
+                .setParameter("owner_id", owner_id)
+                .getSingleResult();
+        return visit != null ? Optional.of(visit) : Optional.empty();
     }
-
+// createquery
     @Override
     public Optional<Owner> findByName(String name) {
-        Owner owner = entityManager.find(Owner.class,name);
-        return owner!=null ? Optional.of(owner) : Optional.empty();
+        Owner visit = entityManager.createQuery("SELECT b FROM Owner b WHERE b.name = :name", Owner.class)
+                .setParameter("name", name)
+                .getSingleResult();
+        return visit != null ? Optional.of(visit) : Optional.empty();
     }
-
     @Override
     public Optional<Owner> findByAddress(String address) {
-        Owner owner = entityManager.find(Owner.class,address);
-        return owner!=null ? Optional.of(owner) : Optional.empty();
+        Owner visit = entityManager.createQuery("SELECT b FROM Owner b WHERE b.address = :address", Owner.class)
+                .setParameter("address", address)
+                .getSingleResult();
+        return visit != null ? Optional.of(visit) : Optional.empty();
     }
 
     @Override
     public Optional<Owner> findByNeighborhood(String neighborhood) {
-        Owner owner = entityManager.find(Owner.class,neighborhood);
-        return owner!=null ? Optional.of(owner) : Optional.empty();
+        Owner visit = entityManager.createQuery("SELECT b FROM Owner b WHERE b.neighborhood = :neighborhood", Owner.class)
+                .setParameter("neighborhood", neighborhood)
+                .getSingleResult();
+        return visit != null ? Optional.of(visit) : Optional.empty();
     }
 
     @Override

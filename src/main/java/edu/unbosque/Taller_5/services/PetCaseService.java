@@ -93,15 +93,15 @@ public class PetCaseService {
             petCaseRepository = new PetCaseRepositoryImpl(entityManager);
             petRepository = new PetRepositoryImpl(entityManager);
 
-            /*
+
             Optional<Pet> pet = petRepository.findByPetId(pet_id);
 
             pet.ifPresent(p -> {
                 p.addPetCase(new PetCase(created_at, type, description));
                 petRepository.save(p);
             });
-             */
-            petCaseRepository.save(new PetCase(created_at, type, description));
+
+            //petCaseRepository.save(new PetCase(created_at, type, description));
 
             entityManager.close();
             entityManagerFactory.close();

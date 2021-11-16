@@ -1,6 +1,7 @@
 package edu.unbosque.Taller_5.jpa.repositories;
 
 import edu.unbosque.Taller_5.jpa.entities.Pet;
+import edu.unbosque.Taller_5.jpa.entities.UserApp;
 import edu.unbosque.Taller_5.jpa.entities.Vet;
 
 import javax.persistence.EntityManager;
@@ -23,20 +24,26 @@ public class VetRepositoryImpl implements VetRepository{
 
     @Override
     public Optional<Vet> findByName(String name) {
-        Vet vet = entityManager.find(Vet.class,name);
-        return vet!=null ? Optional.of(vet) : Optional.empty();
+        Vet vet = entityManager.createQuery("SELECT b FROM Vet b WHERE b.name = :name", Vet.class)
+                .setParameter("name", name)
+                .getSingleResult();
+        return vet != null ? Optional.of(vet) : Optional.empty();
     }
 
     @Override
     public Optional<Vet> findByAddress(String address) {
-        Vet vet = entityManager.find(Vet.class,address);
-        return vet!=null ? Optional.of(vet) : Optional.empty();
+        Vet vet = entityManager.createQuery("SELECT b FROM Vet b WHERE b.address = :address", Vet.class)
+                .setParameter("address", address)
+                .getSingleResult();
+        return vet != null ? Optional.of(vet) : Optional.empty();
     }
 
     @Override
     public Optional<Vet> findByNeighborhood(String neighborhood) {
-        Vet vet = entityManager.find(Vet.class,neighborhood);
-        return vet!=null ? Optional.of(vet) : Optional.empty();
+        Vet vet = entityManager.createQuery("SELECT b FROM Vet b WHERE b.neighborhood = :neighborhood", Vet.class)
+                .setParameter("neighborhood", neighborhood)
+                .getSingleResult();
+        return vet != null ? Optional.of(vet) : Optional.empty();
     }
 
     @Override

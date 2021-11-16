@@ -17,8 +17,10 @@ public class UserAppRepositoryImpl implements UserAppRepository {
 
     @Override
     public Optional<UserApp> findByRole(String role) {
-        UserApp userApp = entityManager.find(UserApp.class,role);
-        return userApp!=null ? Optional.of(userApp) : Optional.empty();
+        UserApp userApp = entityManager.createQuery("SELECT b FROM UserApp b WHERE b.role = :role", UserApp.class)
+                .setParameter("role", role)
+                .getSingleResult();
+        return userApp != null ? Optional.of(userApp) : Optional.empty();
     }
     @Override
     public Optional<UserApp> findByUsername(String username) {

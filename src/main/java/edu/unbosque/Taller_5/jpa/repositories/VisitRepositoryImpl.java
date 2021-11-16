@@ -22,20 +22,26 @@ public class VisitRepositoryImpl implements VisitRepository{
 
     @Override
     public Optional<Visit> findByType(String type) {
-        Visit visit = entityManager.find(Visit.class,type);
-        return visit!=null ? Optional.of(visit) : Optional.empty();
+        Visit visit = entityManager.createQuery("SELECT b FROM Visit b WHERE b.type = :type", Visit.class)
+                .setParameter("type", type)
+                .getSingleResult();
+        return visit != null ? Optional.of(visit) : Optional.empty();
     }
 
     @Override
     public Optional<Visit> findByVet(String vet_name) {
-        Visit visit = entityManager.find(Visit.class,vet_name);
-        return visit!=null ? Optional.of(visit) : Optional.empty();
+        Visit visit = entityManager.createQuery("SELECT b FROM Visit b WHERE b.vet = :vet_name", Visit.class)
+                .setParameter("vet_name", vet_name)
+                .getSingleResult();
+        return visit != null ? Optional.of(visit) : Optional.empty();
     }
 
     @Override
     public Optional<Visit> findByPetId(Integer pet_id) {
-        Visit visit = entityManager.find(Visit.class,pet_id);
-        return visit!=null ? Optional.of(visit) : Optional.empty();
+        Visit visit = entityManager.createQuery("SELECT b FROM Visit b WHERE b.pet = :pet_id", Visit.class)
+                .setParameter("pet_id", pet_id)
+                .getSingleResult();
+        return visit != null ? Optional.of(visit) : Optional.empty();
     }
 
     @Override

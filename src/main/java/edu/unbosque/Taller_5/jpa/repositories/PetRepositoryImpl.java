@@ -23,38 +23,50 @@ public class PetRepositoryImpl implements PetRepository{
 
     @Override
     public Optional<Pet> findByName(String name) {
-        Pet pet = entityManager.find(Pet.class,name);
-        return pet!=null ? Optional.of(pet) : Optional.empty();
+        Pet pet = entityManager.createQuery("SELECT b FROM Pet b WHERE b.name = :name", Pet.class)
+                .setParameter("name", name)
+                .getSingleResult();
+        return pet != null ? Optional.of(pet) : Optional.empty();
     }
 
     @Override
     public Optional<Pet> findBySpecies(String species) {
-        Pet pet = entityManager.find(Pet.class,species);
-        return pet!=null ? Optional.of(pet) : Optional.empty();
+        Pet pet = entityManager.createQuery("SELECT b FROM Pet b WHERE b.species = :species", Pet.class)
+                .setParameter("species", species)
+                .getSingleResult();
+        return pet != null ? Optional.of(pet) : Optional.empty();
     }
 
     @Override
     public Optional<Pet> findByRace(String race) {
-        Pet pet = entityManager.find(Pet.class,race);
-        return pet!=null ? Optional.of(pet) : Optional.empty();
+        Pet pet = entityManager.createQuery("SELECT b FROM Pet b WHERE b.race = :race", Pet.class)
+                .setParameter("race", race)
+                .getSingleResult();
+        return pet != null ? Optional.of(pet) : Optional.empty();
     }
 
     @Override
     public Optional<Pet> findBySize(String size) {
-        Pet pet = entityManager.find(Pet.class,size);
-        return pet!=null ? Optional.of(pet) : Optional.empty();
+        Pet pet = entityManager.createQuery("SELECT b FROM Pet b WHERE b.size = :size", Pet.class)
+                .setParameter("size", size)
+                .getSingleResult();
+        return pet != null ? Optional.of(pet) : Optional.empty();
     }
 
     @Override
     public Optional<Pet> findBySex(String sex) {
-        Pet pet = entityManager.find(Pet.class,sex);
-        return pet!=null ? Optional.of(pet) : Optional.empty();
+        Pet pet = entityManager.createQuery("SELECT b FROM Pet b WHERE b.sex = :sex", Pet.class)
+                .setParameter("sex", sex)
+                .getSingleResult();
+        return pet != null ? Optional.of(pet) : Optional.empty();
     }
 
     @Override
     public Optional<Pet> findByOwner(Integer owner_id) {
-        Pet pet = entityManager.find(Pet.class,owner_id);
-        return pet!=null ? Optional.of(pet) : Optional.empty();
+        Pet pet = entityManager.createQuery("SELECT b FROM Pet b WHERE b.owner = :owner_id", Pet.class)
+                .setParameter("owner_id", owner_id)
+                .getSingleResult();
+        return pet != null ? Optional.of(pet) : Optional.empty();
     }
 
     @Override
