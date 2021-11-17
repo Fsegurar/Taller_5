@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Visit implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "visit_id",nullable = false)
     private Integer visit_id;
 
@@ -30,7 +30,6 @@ public class Visit implements Serializable {
     @ManyToOne
     @JoinColumn(name = "pet_id", referencedColumnName = "pet_id", unique = true)
     private Pet pet;
-
 
     public Visit(){}
 

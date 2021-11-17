@@ -25,7 +25,7 @@ public class Vet implements Serializable {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "vet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "vet", fetch = FetchType.EAGER)
     private List<Visit> visits;
 
     @PreUpdate

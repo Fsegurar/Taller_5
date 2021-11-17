@@ -1,5 +1,6 @@
 package edu.unbosque.Taller_5.jpa.repositories;
 
+import edu.unbosque.Taller_5.jpa.entities.Vet;
 import edu.unbosque.Taller_5.jpa.entities.Visit;
 
 import java.util.List;
@@ -18,6 +19,5 @@ public interface VisitRepository {
     List<Visit> findAll();
 
     Optional<Visit> save (Visit visit);
-
 
 }

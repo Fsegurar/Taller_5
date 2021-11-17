@@ -16,6 +16,7 @@ import java.util.Optional;
 @Stateless
 public class VisitService {
 
+    UserAppRepository userAppRepository;
     VisitRepository visitRepository;
 
     public Visit findByVisitId(Integer visit_id){
@@ -100,6 +101,7 @@ public class VisitService {
             EntityManager entityManager = entityManagerFactory.createEntityManager();
 
             visitRepository = new VisitRepositoryImpl(entityManager);
+            userAppRepository = new UserAppRepositoryImpl(entityManager);
 
             Optional<Pet> pet = Optional.of(new PetService().findByPetId(pet_id));
             Optional<Vet> vet = Optional.of(new VetService().findByName(vet_id));
@@ -110,11 +112,13 @@ public class VisitService {
                 p.addVisit(visit);
             });
 
+            visitRepository.save(visit);
+
             vet.ifPresent(v->{
                 visit.setVet(v);
                 v.addVisit(visit);
             });
-            visitRepository.save(visit);
+
             entityManager.close();
             entityManagerFactory.close();
 

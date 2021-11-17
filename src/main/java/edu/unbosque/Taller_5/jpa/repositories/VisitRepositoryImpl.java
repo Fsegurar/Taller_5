@@ -1,5 +1,7 @@
 package edu.unbosque.Taller_5.jpa.repositories;
 
+import edu.unbosque.Taller_5.jpa.entities.Pet;
+import edu.unbosque.Taller_5.jpa.entities.Vet;
 import edu.unbosque.Taller_5.jpa.entities.Visit;
 
 import javax.persistence.EntityManager;
@@ -61,4 +63,5 @@ public class VisitRepositoryImpl implements VisitRepository{
         }
         return Optional.empty();
     }
+
 }
