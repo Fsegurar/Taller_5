@@ -17,7 +17,9 @@ public class PetRepositoryImpl implements PetRepository{
 
     @Override
     public Optional<Pet> findByPetId(Integer pet_id) {
-        Pet pet = entityManager.find(Pet.class,pet_id);
+        Pet pet = entityManager.createQuery("SELECT b FROM Pet b WHERE b.pet_id = :pet_id", Pet.class)
+                .setParameter("pet_id", pet_id)
+                .getSingleResult();
         return pet!=null ? Optional.of(pet) : Optional.empty();
     }
 

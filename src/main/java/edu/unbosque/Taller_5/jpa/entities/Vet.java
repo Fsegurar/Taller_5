@@ -1,5 +1,7 @@
 package edu.unbosque.Taller_5.jpa.entities;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -39,6 +41,11 @@ public class Vet implements Serializable {
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
+    }
+
+    public void addVisit(Visit visit) {
+        visits.add(visit);
+        visit.setVet(this);
     }
 
     public UserApp getUsername() {

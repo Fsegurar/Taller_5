@@ -1,5 +1,7 @@
 package edu.unbosque.Taller_5.jpa.entities;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,7 +43,7 @@ public class Pet implements Serializable {
     private Owner owner;
 
     @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Visit> visits ;
+    private List<Visit> visits;
 
     @OneToMany(mappedBy = "pet", cascade = CascadeType.MERGE)
     private List<PetCase> cases = new ArrayList<>();
@@ -82,11 +84,11 @@ public class Pet implements Serializable {
         this.sex = sex;
     }
 
-    public Set<Visit> getVisits() {
+    public List<Visit> getVisits() {
         return visits;
     }
 
-    public void setVisits(Set<Visit> visits) {
+    public void setVisits(List<Visit> visits) {
         this.visits = visits;
     }
 

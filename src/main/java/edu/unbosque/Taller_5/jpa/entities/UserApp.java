@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class UserApp {
 
     @Id
-    @Column(name = "username",nullable = false)
+    @Column(name = "username", nullable = false)
     private String username;
 
     @Column(name = "password")

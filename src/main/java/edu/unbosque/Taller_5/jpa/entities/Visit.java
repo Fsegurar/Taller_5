@@ -1,5 +1,7 @@
 package edu.unbosque.Taller_5.jpa.entities;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -22,12 +24,12 @@ public class Visit implements Serializable {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "pet_id", referencedColumnName = "pet_id", unique = true)
-    private Pet pet;
-
-    @ManyToOne
     @JoinColumn(name = "vet_id", referencedColumnName = "name", unique = true)
     private Vet vet;
+
+    @ManyToOne
+    @JoinColumn(name = "pet_id", referencedColumnName = "pet_id", unique = true)
+    private Pet pet;
 
 
     public Visit(){}

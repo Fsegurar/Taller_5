@@ -25,6 +25,11 @@ public class PetCase implements Serializable {
     @JoinColumn(name = "pet_id", referencedColumnName = "pet_id", unique = true)
     private Pet pet;
 
+    @PreUpdate
+    private void onUpdate(){
+        pet.getOwner().setPets(null);
+    }
+
     public PetCase(String created_at, String type, String description) {
         this.created_at = created_at;
         this.type = type;

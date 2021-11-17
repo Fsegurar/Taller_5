@@ -1,9 +1,6 @@
 package edu.unbosque.Taller_5.services;
 
-import edu.unbosque.Taller_5.jpa.entities.Pet;
-import edu.unbosque.Taller_5.jpa.entities.UserApp;
-import edu.unbosque.Taller_5.jpa.entities.Vet;
-import edu.unbosque.Taller_5.jpa.entities.Visit;
+import edu.unbosque.Taller_5.jpa.entities.*;
 import edu.unbosque.Taller_5.jpa.repositories.*;
 import edu.unbosque.Taller_5.servlets.pojos.UserAppPOJO;
 import edu.unbosque.Taller_5.servlets.pojos.VisitPOJO;
@@ -104,7 +101,20 @@ public class VisitService {
 
             visitRepository = new VisitRepositoryImpl(entityManager);
 
-            visitRepository.save(new Visit(created_at, type, description));
+            Optional<Pet> pet = Optional.of(new PetService().findByPetId(pet_id));
+            Optional<Vet> vet = Optional.of(new VetService().findByName(vet_id));
+
+            Visit visit = new Visit(created_at, type, description);
+            pet.ifPresent(p -> {
+                visit.setPet(p);
+                p.addVisit(visit);
+            });
+
+            vet.ifPresent(v->{
+                visit.setVet(v);
+                v.addVisit(visit);
+            });
+            visitRepository.save(visit);
             entityManager.close();
             entityManagerFactory.close();
 
