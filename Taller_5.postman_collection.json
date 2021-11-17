@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "694dd9d1-124f-4dfe-a21d-fbe28161c4f7",
+		"name": "Taller_5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear User Official",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"XXX\",\r\n    \"password\": \"YYY\",\r\n    \"email\": \"xxx@yyy.com\",\r\n    \"role\": \"official\",\r\n    \"official\": {\r\n        \"name\": \"ZZZ\"\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/Taller_5-1.0-SNAPSHOT/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Taller_5-1.0-SNAPSHOT",
+						"api",
+						"users"
+					]
+				},
+				"description": "Crear Usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear User Owner",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"DDD\",\r\n    \"password\": \"RRR\",\r\n    \"email\": \"ddd@yyy.com\",\r\n    \"role\": \"owner\",\r\n    \"owner\": {\r\n        \"name\": \"FFF\",\r\n        \"address\": \"HHH\",\r\n        \"neighborhood\": \"TTT\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/Taller_5-1.0-SNAPSHOT/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Taller_5-1.0-SNAPSHOT",
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear User Vet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"SSS\",\r\n    \"password\": \"KKK\",\r\n    \"email\": \"sss@yyy.com\",\r\n    \"role\": \"vet\",\r\n    \"vet\": {\r\n        \"name\": \"DavidVet\",\r\n        \"address\": \"TTT\",\r\n        \"neighborhood\": \"DDD\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/Taller_5-1.0-SNAPSHOT/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Taller_5-1.0-SNAPSHOT",
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar User Official",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"Diego2343@yyy.com\",\r\n    \"official\":{\r\n        \"name\":\"Diego R\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/Taller_5-1.0-SNAPSHOT/api/users/XXX",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Taller_5-1.0-SNAPSHOT",
+						"api",
+						"users",
+						"XXX"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar User Owner",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"Felipe123@yyy.com\",\r\n    \"owner\":{\r\n        \"name\":\"Felipe S\",\r\n        \"address\":\"Calle C\",\r\n        \"neighborhood\":\"Prado\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/Taller_5-1.0-SNAPSHOT/api/users/DDD",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Taller_5-1.0-SNAPSHOT",
+						"api",
+						"users",
+						"DDD"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar User Vet",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"David4362@yyy.com\",\r\n    \"vet\":{\r\n        \"address\": \"Algo\",\r\n        \"neighborhood\":\"Asas\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/Taller_5-1.0-SNAPSHOT/api/users/SSS",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Taller_5-1.0-SNAPSHOT",
+						"api",
+						"users",
+						"SSS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Pet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Max\",\r\n    \"species\": \"Perro\",\r\n    \"race\": \"Bulldog\",\r\n    \"size\": \"Mediano\",\r\n    \"sex\": \"Macho\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/Taller_5-1.0-SNAPSHOT/api/users/1/pets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Taller_5-1.0-SNAPSHOT",
+						"api",
+						"users",
+						"1",
+						"pets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Pet",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Rex\",\r\n    \"species\":\"Perro\",\r\n    \"race\":\"Pastor Alemán\",\r\n    \"size\":\"Grande\",\r\n    \"sex\":\"Hembra\",\r\n    \"picture\":\"https://picture.com/rex\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/Taller_5-1.0-SNAPSHOT/api/users/1/pets/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Taller_5-1.0-SNAPSHOT",
+						"api",
+						"users",
+						"1",
+						"pets",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear PetCase",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"created_at\":\"15/11/2021\",\r\n    \"type\":\"perdida\",\r\n    \"description\":\"Se perdió el día.....\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/Taller_5-1.0-SNAPSHOT/api/users/1/pets/1/petcase",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Taller_5-1.0-SNAPSHOT",
+						"api",
+						"users",
+						"1",
+						"pets",
+						"1",
+						"petcase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Visit Microchip",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"created_at\":\"15/11/2021\",\r\n    \"type\":\"implantación de microchip\",\r\n    \"description\":\"Implantación de microchip\",\r\n    \"pet\":{\r\n        \"microchip\":\"123456789\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/Taller_5-1.0-SNAPSHOT/api/users/DavidVet/pets/1/visit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Taller_5-1.0-SNAPSHOT",
+						"api",
+						"users",
+						"DavidVet",
+						"pets",
+						"1",
+						"visit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Visit Esterilización",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"created_at\":\"15/11/2021\",\r\n    \"type\":\"esterilizacion\",\r\n    \"description\":\"Visita de esterilizacion...\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/Taller_5-1.0-SNAPSHOT/api/users/DavidVet/pets/1/visit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Taller_5-1.0-SNAPSHOT",
+						"api",
+						"users",
+						"DavidVet",
+						"pets",
+						"1",
+						"visit"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
